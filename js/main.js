@@ -1,12 +1,19 @@
 function ToDoList() {
+// use single quotes
 this.elem = document.createElement("ul");
+// name it as itemsList or just items - you don't need to specify a type as a name of a variable	
 this.itemsArr = [];
+	
+// use single quotes (') instead of double
 this.currentFilter = "";
 
 this.addNewItem = function(item) {
+	// don't use tabs, use spaces (you can configure this in your editor to insert spaces on a tab press)
+	// two spaces is prefered
 	this.itemsArr.push(item);
 };
 this.deleteItem = function(instance) {
+	// use .forEach or .filter this.itemsArr = this.itemsArr.filter(function(item) {retun item !== instance}
 	for(var i = 0; i < this.itemsArr.length; i++){
 		if(this.itemsArr[i] == instance) this.itemsArr.splice(i,1);
 	}
@@ -20,7 +27,10 @@ this.getActive = function() {
 	this.currentFilter = "Active";
 	var itemsArrActive = [];
 	var temp = this.itemsArr;
+	
+	// use .filter
 	for(var i = 0; i < this.itemsArr.length; i++) {
+		// always use === operator or use exclamation point if (!this.itemsArr[i].checked) {}
 		if(this.itemsArr[i].checked == false){
 			itemsArrActive.push(this.itemsArr[i]);
 		}
@@ -34,6 +44,8 @@ this.getCompleted = function() {
 	var itemsArrActive = [];
 	var temp = this.itemsArr;
 	for(var i = 0; i < this.itemsArr.length; i++) {
+		
+		// always use === operator or just if (this.itemsArr[i].checked) {}
 		if(this.itemsArr[i].checked == true){
 			itemsArrActive.push(this.itemsArr[i]);
 		}
@@ -42,7 +54,12 @@ this.getCompleted = function() {
 	this.render();
 	this.itemsArr = temp;
 };
+	
+	
+// generally you can rewrite this method without all this cycles inside	
 this.deleteCompleted = function() {
+	// you can be just .filter(function (item) { return item.checked})
+	// so you don't need this overcomplication 
 	var filteredDtaListAll = this.itemsArr.filter(function (item){
 		var filteredItem;
 		if(item.checked == true) filteredItem = item;
@@ -67,11 +84,17 @@ this.render = function() {
 	var buttonContainer = document.getElementById("footLi");
 	buttonContainer.innerHTML = "";
 	//-------------------------------------------------------
+	
+	// don't use button1 as a name as it doesn't give you understanding of what this button do
+	// instead name it as for example showAllContainer
 	var button1 = document.createElement("li");
 	var showAllButton = document.createElement("button");
+	// class names should be separated with - show-all instead of show_all
 	showAllButton.className = "show_all";
 	showAllButton.innerText = "All";
 	showAllButton.className = this.currentFilter === "All" ? "filtered_button" : "";
+	
+	// remove this ?
 	showAllButton.onclick = function (){
 
 	};
