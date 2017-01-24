@@ -25,7 +25,7 @@ function InputForm(name, list){
 		this.elem.appendChild(inputForm);
 
 		var addButton = document.createElement('button');
-		addButton.className = "addButton";
+		addButton.className = 'addButton';
 		var iconAdd = document.createElement('i');
 		iconAdd.className = 'fa fa-plus';
 		addButton.appendChild(iconAdd);
