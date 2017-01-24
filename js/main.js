@@ -121,50 +121,49 @@ function FiltersOfList(list) {
 };
 
 
-
 function ToDoList() {
-this.elem = document.createElement('ul');
-this.itemsArr = [];
+	this.elem = document.createElement('ul');
+	this.itemsArr = [];
 
-this.addNewItem = function(item) {
-	this.itemsArr.push(item);
-	item.render();
-};
-this.deleteItem = function(instance) {
-	this.itemsArr = this.itemsArr.filter(function(item) { return item !== instance; });
-	this.render();
-};
-this.getAll = function() {
-	this.render();
-};
-this.getActive = function() {
-	var temp = this.itemsArr;
-	this.itemsArr = this.itemsArr.filter( function (item){ if(item.checked === false) return item; });
-	this.render();
-	this.itemsArr = temp;
-};
-this.getCompleted = function() {
-	var temp = this.itemsArr;
-	this.itemsArr = this.itemsArr.filter( function (item){ if(item.checked === true) return item; });
-	this.render();
-	this.itemsArr = temp;
-};
-this.deleteCompleted = function() {
-	this.itemsArr = this.itemsArr.filter(function(item) {
-		if(item.checked === false) return item;
-	});
-	this.render();
-};
+	this.addNewItem = function(item) {
+		this.itemsArr.push(item);
+		item.render();
+	};
+	this.deleteItem = function(instance) {
+		this.itemsArr = this.itemsArr.filter(function(item) { return item !== instance; });
+		this.render();
+	};
+	this.getAll = function() {
+		this.render();
+	};
+	this.getActive = function() {
+		var temp = this.itemsArr;
+		this.itemsArr = this.itemsArr.filter( function (item){ if(item.checked === false) return item; });
+		this.render();
+		this.itemsArr = temp;
+	};
+	this.getCompleted = function() {
+		var temp = this.itemsArr;
+		this.itemsArr = this.itemsArr.filter( function (item){ if(item.checked === true) return item; });
+		this.render();
+		this.itemsArr = temp;
+	};
+	this.deleteCompleted = function() {
+		this.itemsArr = this.itemsArr.filter(function(item) {
+			if(item.checked === false) return item;
+		});
+		this.render();
+	};
 
-this.render = function() {
-	this.elem.innerHTML = '';
-	var that = this;
-	that.itemsArr.forEach( function(item) {
-		that.elem.appendChild(item.render());
-	});
+	this.render = function() {
+		this.elem.innerHTML = '';
+		var that = this;
+		that.itemsArr.forEach( function(item) {
+			that.elem.appendChild(item.render());
+		});
 
-	return this.elem;
-};
+		return this.elem;
+	};
 
 };
 
@@ -220,17 +219,17 @@ function ToDoItem(value, checked, edit, list) {
 
 		var editButton = document.createElement('button');
 		editButton.setAttribute('title', 'Click to edit todo');
-   		var iconEdit = document.createElement('i');
-   		var iconEdit1 = document.createElement('i');
-   		iconEdit.className = 'fa fa-pencil-square-o';
-   		iconEdit1.className = 'fa fa-check-circle-o';
-   		editButton.className = 'edit';
-   		if(this.edit === true){ editButton.appendChild(iconEdit1); }
-   		else { editButton.appendChild(iconEdit); }
+   	var iconEdit = document.createElement('i');
+   	var iconEdit1 = document.createElement('i');
+   	iconEdit.className = 'fa fa-pencil-square-o';
+   	iconEdit1.className = 'fa fa-check-circle-o';
+   	editButton.className = 'edit';
+   	if(this.edit === true){ editButton.appendChild(iconEdit1); }
+   	else { editButton.appendChild(iconEdit); }
 
-   		var deleteButton = document.createElement('button');
-   		deleteButton.setAttribute('title', 'Click to delete todo');
-   		var iconDel = document.createElement('i');
+   	var deleteButton = document.createElement('button');
+   	deleteButton.setAttribute('title', 'Click to delete todo');
+   	var iconDel = document.createElement('i');
 		iconDel.className = 'fa fa-times';
 		deleteButton.className = 'del';
 		deleteButton.appendChild(iconDel);
@@ -239,11 +238,11 @@ function ToDoItem(value, checked, edit, list) {
 		tBar.appendChild(editButton);
 		tBar.appendChild(deleteButton);
 		this.elem.appendChild(fontAweTest);
-   		this.elem.appendChild(internalElement);
-   		this.elem.appendChild(tBar);
+   	this.elem.appendChild(internalElement);
+   	this.elem.appendChild(tBar);
 
-   		var instance = this;
-   		doneButton.onclick = function (){
+   	var instance = this;
+   	doneButton.onclick = function (){
 			instance.setChecked();
 		};
 
