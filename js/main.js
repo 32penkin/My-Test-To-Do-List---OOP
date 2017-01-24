@@ -3,8 +3,13 @@ function InputForm(name, list) {
   this.name = name;
   this.list = list;
 
+<<<<<<< HEAD
 
   this.sendNewItem = function (value) {
+=======
+  this.sendNewItem = function (value) {
+
+>>>>>>> origin/master
     if (!value || value === '' || value === ' ') return false;
     this.list.addNewItem(new ToDoItem(value, false, false, list));
     list.render();
@@ -48,7 +53,11 @@ function InputForm(name, list) {
     };
     return this.elem;
   };
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> origin/master
 
 function FooterOfList(str) {
   this.str = str;
@@ -57,7 +66,11 @@ function FooterOfList(str) {
     this.elem.innerText = this.str;
     return this.elem;
   };
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> origin/master
 
 function FiltersOfList(list) {
   this.list = list;
@@ -94,6 +107,7 @@ function FiltersOfList(list) {
     this.elem.appendChild(deleteCompletedContainer);
 
     var tempList = this.list;
+<<<<<<< HEAD
     var that = this;
     showAllButton.onclick = function () {
       that.currentFilter = 'All';
@@ -117,10 +131,29 @@ function FiltersOfList(list) {
       that.elem.innerHTML = '';
       that.render();
       
+=======
+    showAllButton.onclick = function () {
+      this.currentFilter = 'All';
+      tempList.getAll();
+      //console.log(this.currentFilter);
+    };
+
+    showActiveButton.onclick = function () {
+      this.currentFilter = 'Active';
+      tempList.getActive();
+      //console.log(this.currentFilter);
+    };
+
+    showCompletedButton.onclick = function () {
+      this.currentFilter = 'Completed';
+      tempList.getCompleted();
+      //console.log(this.currentFilter);
+>>>>>>> origin/master
     };
 
     deleteCompletedButton.onclick = function () {
       tempList.deleteCompleted();
+<<<<<<< HEAD
       that.elem.innerHTML = '';
       that.render();
     };
@@ -129,6 +162,12 @@ function FiltersOfList(list) {
   };
 
 };
+=======
+    };
+    return this.elem;
+  };
+}
+>>>>>>> origin/master
 
 
 function ToDoList() {
@@ -181,7 +220,11 @@ function ToDoList() {
     return this.elem;
   };
 
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> origin/master
 
 
 function ToDoItem(value, checked, edit, list) {
@@ -286,7 +329,11 @@ function ToDoItem(value, checked, edit, list) {
     return this.elem;
   };
 
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> origin/master
 
 
 var myToDoList = new ToDoList();
