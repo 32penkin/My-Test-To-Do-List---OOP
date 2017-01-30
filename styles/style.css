@@ -57,7 +57,7 @@ header input::input-placeholder:focus {
 	margin-top: 10px;
 }
 
-.addButton {
+.add-button {
 	height: 29.33px;
 	width: 29.33px;
 	margin-left: 7px;
@@ -113,7 +113,7 @@ span {
 
 /*-----------------------------------tools bar----------------------------------------*/
 
-.tBar {
+.toolBar {
 	padding: 0;
 	margin: 0;
 	/*border: 0.5px solid #0F3440;
@@ -128,7 +128,7 @@ span {
 	opacity: 0;
 }
 
-li:hover .tBar {
+li:hover .toolBar {
 	opacity: 1;
 }
 
@@ -161,7 +161,7 @@ li:hover .tBar {
 	/*border-radius: 0 5px 5px 0;*/
 }
 
-.int_el {
+.int-el {
 	width: 200px;
 	height: 26px;
 	border: 1px solid #103845;
@@ -205,11 +205,11 @@ float:left;
 margin:0 10px;
 }
 
-.filtered_button {
+.filtered-button {
 	border: 1.5px solid #5b3416;
 }
 
-.last_foot {
+.last-foot {
 	
 	text-align: center;
 	font-size: 13px;
@@ -217,7 +217,7 @@ margin:0 10px;
 	border-top: 1px solid #50627f;
 }
 
-.last_foot p {
+.last-foot p {
 	font-color: #50627f;
 }
 
