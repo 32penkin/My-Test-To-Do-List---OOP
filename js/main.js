@@ -2,47 +2,30 @@ class InputForm {
   constructor(name, list) {
     this.name = name;
     this.list = list;
-    this.elem = document.createElement('div');
+    this.elem = document.getElementById('head');
+    this.template = `<div class='hat'><h1>{{nameOfList}}</h1></div>
+                     <input type='text' placeholder='Add task here' class='text1' id='inp'/>
+                     <button class='add-button' id='addbtn'><i class='fa fa-plus'></i></button>`;
   }
   sendNewItem(value) {
-    if(!value.trim().replace(' ', '')) return false;
+    if(!value.trim()) return false;
     this.list.addNewItem(new ToDoItem(value, false, false, this.list));
     this.list.render();
   }
   render() {
-    let nameOfListContainer = document.createElement('div');
-    nameOfListContainer.className = 'hat';
-    let nameOfList = document.createElement('h1');
-    nameOfList.innerText = this.name;
-    nameOfListContainer.appendChild(nameOfList);
-    this.elem.appendChild(nameOfListContainer);
-
-    let inputForm = document.createElement('input');
-    inputForm.focus();
-    inputForm.type = 'text';
-    inputForm.placeholder = 'Add task here';
-    inputForm.className = 'text1';
-    this.elem.appendChild(inputForm);
-
-    let addButton = document.createElement('button');
-    addButton.className = 'add-button';
-    let iconAdd = document.createElement('i');
-    iconAdd.className = 'fa fa-plus';
-    addButton.appendChild(iconAdd);
-    this.elem.appendChild(addButton);
-
+    this.elem.innerHTML = Handlebars.compile(this.template)({'nameOfList': this.name});
+    document.getElementById('inp').focus();
     let that = this;
-    addButton.onclick = function() {
-      that.sendNewItem(inputForm.value);
-      inputForm.focus();
-      inputForm.select();
+    document.getElementById('addbtn').onclick = function(){
+      that.sendNewItem(document.getElementById('inp').value);
+      document.getElementById('inp').focus();
+      document.getElementById('inp').select();
     };
-
-    inputForm.onkeyup = function(event) {
+    document.getElementById('inp').onkeyup = function(event) {
       if(event.which === 13){
-        that.sendNewItem(inputForm.value);
-        inputForm.focus();
-        inputForm.select();
+        that.sendNewItem(document.getElementById('inp').value);
+        document.getElementById('inp').focus();
+        document.getElementById('inp').select();
       }
     };
     return this.elem;
@@ -52,74 +35,50 @@ class InputForm {
 class FooterOfList {
   constructor(str) {
     this.str = str;
-    this.elem = document.createElement('p');
+    this.template = '<p>{{str}}</p>';
   }
   render() {
-    this.elem.innerText = this.str;
-    return this.elem;
+    return Handlebars.compile(this.template)({'str': this.str});
   }
 }
-
 
 class FiltersOfList {
   constructor(list) {
     this.list = list;
-    this.elem = document.createElement('ul');
+    this.elem = document.getElementById('llist');
+    this.template = `<li><button id='get_all' class='{{filteredButtonAllClass}}'>All</button></li>
+                     <li><button id='get_active' class='{{filteredButtonActiveClass}}'>Active</button></li>
+                     <li><button id='get_completed' class='{{filteredButtonCompletedClass}}'>Completed</button></li>
+                     <li><button id='clear_completed'>Clear completed</button></li>`;
     this.currentFilter = '';
   }
   render() {
-    //-------------------------------------------------------
-    let showAllContainer = document.createElement('li');
-    let showAllButton = document.createElement('button');
-    showAllButton.innerText = 'All';
-    showAllButton.className = this.currentFilter === 'All' ? 'filtered-button' : '';
-    showAllContainer.appendChild(showAllButton);
-    this.elem.appendChild(showAllContainer);
-    //-------------------------------------------------------
-    let showActiveContainer = document.createElement('li');
-    let showActiveButton = document.createElement('button');
-    showActiveButton.innerText = 'Active';
-    showActiveButton.className = this.currentFilter === 'Active' ? 'filtered-button' : '';
-    showActiveContainer.appendChild(showActiveButton);
-    this.elem.appendChild(showActiveContainer);
-    //-------------------------------------------------------
-    let showCompletedContainer = document.createElement('li');
-    let showCompletedButton = document.createElement('button');
-    showCompletedButton.innerText = 'Completed';
-    showCompletedButton.className = this.currentFilter === 'Completed' ? 'filtered-button' : '';
-    showCompletedContainer.appendChild(showCompletedButton);
-    this.elem.appendChild(showCompletedContainer);
-    //-------------------------------------------------------
-    let deleteCompletedContainer = document.createElement('li');
-    let deleteCompletedButton = document.createElement('button');
-    deleteCompletedButton.innerText = 'Clear completed';
-    deleteCompletedContainer.appendChild(deleteCompletedButton);
-    this.elem.appendChild(deleteCompletedContainer);
-
+    this.elem.innerHTML = Handlebars.compile(this.template)({
+      'filteredButtonAllClass': this.currentFilter === 'All' ? 'filtered-button' : '',
+      'filteredButtonActiveClass': this.currentFilter === 'Active' ? 'filtered-button' : '',
+      'filteredButtonCompletedClass': this.currentFilter === 'Completed' ? 'filtered-button' : ''
+    });
     let tempList = this.list;
     let that = this;
-    showAllButton.onclick = function (){
+    document.getElementById('get_all').onclick = function (){
       that.currentFilter = 'All';
       tempList.getAll();
       that.elem.innerHTML = '';
-      that.render();
+      that.render()
     };
-
-    showActiveButton.onclick = function(){
+    document.getElementById('get_active').onclick = function (){
       that.currentFilter = 'Active';
       tempList.getActive();
       that.elem.innerHTML = '';
       that.render();
     };
-
-    showCompletedButton.onclick = function (){
+    document.getElementById('get_completed').onclick = function (){
       that.currentFilter = 'Completed';
       tempList.getCompleted();
       that.elem.innerHTML = '';
       that.render();
     };
-
-    deleteCompletedButton.onclick = function (){
+    document.getElementById('clear_completed').onclick = function (){
       that.currentFilter = 'All';
       tempList.deleteCompleted();
       that.elem.innerHTML = '';
@@ -131,7 +90,7 @@ class FiltersOfList {
 
 class ToDoList {
   constructor() {
-    this.elem = document.createElement('ul');
+    this.elem = document.getElementById('tList');
     this.itemsArr = [];
   }
   addNewItem(item) {
@@ -171,7 +130,6 @@ class ToDoList {
   }
 }
 
-
 class ToDoItem {
   constructor(value, checked, edit, list){
     this.value = value;
@@ -179,6 +137,21 @@ class ToDoItem {
     this.edit = edit;
     this.list = list;
     this.elem = document.createElement('li');
+    this.template = `<i class='fa fa-hand-o-right'></i>
+                     {{#if editCh}}
+                        <input type = 'text' value = '{{value}}' class = 'int-el'/>
+                     {{else}}
+                        <span class='{{checkCh}}'>{{value}}</span>
+                     {{/if}}
+                     <div class='toolBar'>
+                        <button class='check' title='Click to check todo'><i class='fa fa-check'></i></button>
+                        {{#if editCh}}
+                          <button class='edit' title='Click to save edition'><i class='fa fa-check-circle-o'></i></button>
+                        {{else}}
+                          <button class='edit' title='Click to edit todo'><i class='fa fa-pencil-square-o'></i></button>
+                        {{/if}}
+                        <button class='del' title='Click to delete todo'><i class='fa fa-times''></i></button>
+                     </div>`;
   }
   setChecked() {
     this.checked = !this.checked;
@@ -191,82 +164,28 @@ class ToDoItem {
     return false;
   }
   render() {
-    this.elem.innerHTML = '';
     this.elem.className = 'view';
-
-    if (this.edit) {
-      var internalElement = document.createElement('input');
-      internalElement.type = 'text';
-      internalElement.value = this.value;
-      internalElement.className = 'int-el';
-    } else {
-      var internalElement = document.createElement('span');
-      internalElement.className = (this.checked) ? 'checked' : '';
-      internalElement.innerHTML = this.value;
-    }
-
-    let fontAweTest = document.createElement('i');
-    fontAweTest.className = 'fa fa-hand-o-right';
-
-    let toolBar = document.createElement('div');
-    toolBar.className = 'toolBar';
-
-    let doneButton = document.createElement('button');
-    doneButton.setAttribute('title', 'Click to check todo');
-    let iconCh = document.createElement('i');
-    iconCh.className = 'fa fa-check';
-    doneButton.className = 'check';
-    doneButton.appendChild(iconCh);
-
-
-    let editButton = document.createElement('button');
-    editButton.setAttribute('title', 'Click to edit todo');
-    let iconEdit = document.createElement('i');
-    let iconSave = document.createElement('i');
-    iconEdit.className = 'fa fa-pencil-square-o';
-    iconSave.className = 'fa fa-check-circle-o';
-    editButton.className = 'edit';
-    if(this.edit){ editButton.appendChild(iconSave); }
-    else { editButton.appendChild(iconEdit); }
-
-    let deleteButton = document.createElement('button');
-    deleteButton.setAttribute('title', 'Click to delete todo');
-    let iconDel = document.createElement('i');
-    iconDel.className = 'fa fa-times';
-    deleteButton.className = 'del';
-    deleteButton.appendChild(iconDel);
-
-    toolBar.appendChild(doneButton);
-    toolBar.appendChild(editButton);
-    toolBar.appendChild(deleteButton);
-    this.elem.appendChild(fontAweTest);
-    this.elem.appendChild(internalElement);
-    this.elem.appendChild(toolBar);
-
+    this.elem.innerHTML = Handlebars.compile(this.template)({
+      'editCh': this.edit,
+      'value': this.value,
+      'checkCh': this.checked ? 'checked' : ''
+    });
     let instance = this;
-    doneButton.onclick = function (){
+    let parentList = this.list;
+    this.elem.querySelector('.check').onclick = function(){
       instance.setChecked();
     };
-    editButton.onclick = function (){
-      if (instance.edit) instance.value = internalElement.value;
+    this.elem.querySelector('.edit').onclick = function() {
+      if (instance.edit) instance.value = instance.elem.querySelector('.int-el').value;
       instance.setEdit();
     };
-    internalElement.onkeyup = function(event){
-      if(event.which === 13){
-        if (instance.edit) instance.value = internalElement.value;
-        instance.setEdit();
-      }
-    };
-    let parentList = this.list;
-    deleteButton.onclick = function (){
+    this.elem.querySelector('.del').onclick = function() {
       parentList.deleteItem(instance);
       instance.render();
     };
-
     return this.elem;
   }
 }
-
 
 let myToDoList = new ToDoList();
 let myInputForm = new InputForm('toDos', myToDoList);
@@ -276,4 +195,4 @@ let myFooterOfList = new FooterOfList('Press Enter to add todo');
 document.getElementsByTagName('header')[0].appendChild(myInputForm.render());
 document.getElementsByTagName('main')[0].appendChild(myToDoList.render());
 document.getElementsByTagName('footer')[0].appendChild(myFilterOfList.render());
-document.getElementsByTagName('footer')[1].appendChild(myFooterOfList.render());
+document.getElementById('last_foot').innerHTML = myFooterOfList.render();
