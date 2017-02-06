@@ -4,6 +4,7 @@
     "description": "",
     "author": "Yauhen",
     "dependencies": {
-		"font-awesome": "*"
+		"font-awesome": "*",
+		"handlebars": "4.0.6"
     }
 }

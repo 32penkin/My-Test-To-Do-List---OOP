@@ -4,8 +4,8 @@ class InputForm {
     this.list = list;
     this.elem = document.getElementById('head');
     this.template = `<div class='hat'><h1>{{nameOfList}}</h1></div>
-                     <input type='text' placeholder='Add task here' class='text1' id='inp'/>
-                     <button class='add-button' id='addbtn'><i class='fa fa-plus'></i></button>`;
+                     <input type='text' placeholder='Add task here' class='input-text'/>
+                     <button class='add-button'><i class='fa fa-plus'></i></button>`;
   }
   sendNewItem(value) {
     if(!value.trim()) return false;
@@ -14,18 +14,18 @@ class InputForm {
   }
   render() {
     this.elem.innerHTML = Handlebars.compile(this.template)({'nameOfList': this.name});
-    document.getElementById('inp').focus();
+    this.elem.querySelector('.input-text').focus();
     let that = this;
-    document.getElementById('addbtn').onclick = function(){
-      that.sendNewItem(document.getElementById('inp').value);
-      document.getElementById('inp').focus();
-      document.getElementById('inp').select();
+    this.elem.querySelector('.add-button').onclick = function() {
+      that.sendNewItem(that.elem.querySelector('.input-text').value);
+      that.elem.querySelector('.input-text').focus();
+      that.elem.querySelector('.input-text').select();
     };
-    document.getElementById('inp').onkeyup = function(event) {
+    this.elem.querySelector('.input-text').onkeyup = function(event) {
       if(event.which === 13){
-        that.sendNewItem(document.getElementById('inp').value);
-        document.getElementById('inp').focus();
-        document.getElementById('inp').select();
+        that.sendNewItem(that.elem.querySelector('.input-text').value);
+        that.elem.querySelector('.input-text').focus();
+        that.elem.querySelector('.input-text').select();
       }
     };
     return this.elem;
@@ -35,17 +35,19 @@ class InputForm {
 class FooterOfList {
   constructor(str) {
     this.str = str;
+    this.elem = document.getElementById('lower_signature');
     this.template = '<p>{{str}}</p>';
   }
   render() {
-    return Handlebars.compile(this.template)({'str': this.str});
+    this.elem.innerHTML = Handlebars.compile(this.template)({'str': this.str});
+    return this.elem;
   }
 }
 
 class FiltersOfList {
   constructor(list) {
     this.list = list;
-    this.elem = document.getElementById('llist');
+    this.elem = document.getElementById('filters-list');
     this.template = `<li><button id='get_all' class='{{filteredButtonAllClass}}'>All</button></li>
                      <li><button id='get_active' class='{{filteredButtonActiveClass}}'>Active</button></li>
                      <li><button id='get_completed' class='{{filteredButtonCompletedClass}}'>Completed</button></li>
@@ -60,25 +62,25 @@ class FiltersOfList {
     });
     let tempList = this.list;
     let that = this;
-    document.getElementById('get_all').onclick = function (){
+    this.elem.querySelector('#get_all').onclick = function (){
       that.currentFilter = 'All';
       tempList.getAll();
       that.elem.innerHTML = '';
       that.render()
     };
-    document.getElementById('get_active').onclick = function (){
+    this.elem.querySelector('#get_active').onclick = function (){
       that.currentFilter = 'Active';
       tempList.getActive();
       that.elem.innerHTML = '';
       that.render();
     };
-    document.getElementById('get_completed').onclick = function (){
+    this.elem.querySelector('#get_completed').onclick = function (){
       that.currentFilter = 'Completed';
       tempList.getCompleted();
       that.elem.innerHTML = '';
       that.render();
     };
-    document.getElementById('clear_completed').onclick = function (){
+    this.elem.querySelector('#clear_completed').onclick = function (){
       that.currentFilter = 'All';
       tempList.deleteCompleted();
       that.elem.innerHTML = '';
@@ -195,4 +197,4 @@ let myFooterOfList = new FooterOfList('Press Enter to add todo');
 document.getElementsByTagName('header')[0].appendChild(myInputForm.render());
 document.getElementsByTagName('main')[0].appendChild(myToDoList.render());
 document.getElementsByTagName('footer')[0].appendChild(myFilterOfList.render());
-document.getElementById('last_foot').innerHTML = myFooterOfList.render();
+document.getElementsByTagName('footer')[1].appendChild(myFooterOfList.render());
