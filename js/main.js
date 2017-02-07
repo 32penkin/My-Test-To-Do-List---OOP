@@ -1,19 +1,21 @@
-Handlebars.registerHelper('tern', function (result, value1, value2, forCompare) {
-  if(forCompare.trim() !== '') return result === forCompare ? value1 : value2;
-  else return result ? value1 : value2;
+Handlebars.registerHelper('tern', function (value, equal, value1, value2) {
+  return value === equal ? value1 : value2;
 });
 
-class CommonParent {
+class BaseComponent {
+
   constructor(containerElement) {
     this.template;
     this.elem = document.createElement(containerElement);
   }
+
   compile() {
     return Handlebars.compile(this.template)(this);
   }
 }
 
-class InputForm extends CommonParent {
+class InputForm extends BaseComponent {
+
   constructor(name, list) {
     super('div');
     this.name = name;
@@ -22,128 +24,139 @@ class InputForm extends CommonParent {
                      <input type="text" placeholder="Add task here" class="input-text"/>
                      <button class="add-button"><i class="fa fa-plus"></i></button>`;
   }
+
   sendNewItem(value) {
     if(!value.trim()) return false;
     this.list.addNewItem(new ToDoItem(value, false, false, this.list));
     this.list.render();
   }
+
   render() {
     this.elem.innerHTML = this.compile();
     this.elem.querySelector('.input-text').focus();
-    let that = this;
-    this.elem.querySelector('.add-button').onclick = function() {
-      that.sendNewItem(that.elem.querySelector('.input-text').value);
-      that.elem.querySelector('.input-text').focus();
-      that.elem.querySelector('.input-text').select();
+    this.elem.querySelector('.add-button').onclick = () => {
+      this.sendNewItem(this.elem.querySelector('.input-text').value);
+      this.elem.querySelector('.input-text').focus();
+      this.elem.querySelector('.input-text').select();
     };
-    this.elem.querySelector('.input-text').onkeyup = function(event) {
+    this.elem.querySelector('.input-text').onkeyup = (event) => {
       if(event.which === 13){
-        that.sendNewItem(that.elem.querySelector('.input-text').value);
-        that.elem.querySelector('.input-text').focus();
-        that.elem.querySelector('.input-text').select();
+        this.sendNewItem(this.elem.querySelector('.input-text').value);
+        this.elem.querySelector('.input-text').focus();
+        this.elem.querySelector('.input-text').select();
       }
     };
     return this.elem;
   }
 }
 
-class FooterOfList extends CommonParent {
+class FooterOfList extends BaseComponent {
+
   constructor(str) {
     super('div');
     this.str = str;
     this.template = '<p>{{ str }}</p>';
   }
+
   render() {
     this.elem.innerHTML = this.compile();
     return this.elem;
   }
 }
 
-class FiltersOfList extends CommonParent {
+class FiltersOfList extends BaseComponent {
+
   constructor(list) {
     super('ul');
     this.list = list;
     this.currentFilter = '';
-    this.template = `<li><button id="get_all" class="{{ tern currentFilter 'filtered-button' '' 'All' }}">All</button></li>
-                     <li><button id="get_active" class="{{ tern currentFilter 'filtered-button' '' 'Active' }}">Active</button></li>
-                     <li><button id='get_completed' class="{{ tern currentFilter 'filtered-button' '' 'Completed' }}">Completed</button></li>
+    this.template = `<li><button id="get_all" class="{{ tern currentFilter 'All' 'filtered-button' '' }}">All</button></li>
+                     <li><button id="get_active" class="{{ tern currentFilter 'Active' 'filtered-button' '' }}">Active</button></li>
+                     <li><button id='get_completed' class="{{ tern currentFilter 'Completed' 'filtered-button' '' }}">Completed</button></li>
                      <li><button id="clear_completed">Clear completed</button></li>`;
   }
+
   render() {
     this.elem.innerHTML = this.compile();
-    let tempList = this.list;
-    let that = this;
-    this.elem.querySelector('#get_all').onclick = function (){
-      that.currentFilter = 'All';
-      tempList.getAll();
-      that.elem.innerHTML = '';
-      that.render()
+    this.elem.querySelector('#get_all').onclick = () => {
+      this.currentFilter = 'All';
+      this.list.getAll();
+      this.elem.innerHTML = '';
+      this.render()
     };
-    this.elem.querySelector('#get_active').onclick = function (){
-      that.currentFilter = 'Active';
-      tempList.getActive();
-      that.elem.innerHTML = '';
-      that.render();
+    this.elem.querySelector('#get_active').onclick =  () => {
+      this.currentFilter = 'Active';
+      this.list.getActive();
+      this.elem.innerHTML = '';
+      this.render();
     };
-    this.elem.querySelector('#get_completed').onclick = function (){
-      that.currentFilter = 'Completed';
-      tempList.getCompleted();
-      that.elem.innerHTML = '';
-      that.render();
+    this.elem.querySelector('#get_completed').onclick = () => {
+      this.currentFilter = 'Completed';
+      this.list.getCompleted();
+      this.elem.innerHTML = '';
+      this.render();
     };
-    this.elem.querySelector('#clear_completed').onclick = function (){
-      that.currentFilter = 'All';
-      tempList.deleteCompleted();
-      that.elem.innerHTML = '';
-      that.render();
+    this.elem.querySelector('#clear_completed').onclick = () => {
+      this.currentFilter = 'All';
+      this.list.deleteCompleted();
+      this.elem.innerHTML = '';
+      this.render();
     };
     return this.elem;
   }
 }
 
-class ToDoList extends CommonParent {
+class ToDoList extends BaseComponent {
+
   constructor() {
     super('ul');
     this.itemsArr = [];
   }
+
   addNewItem(item) {
     this.itemsArr.push(item);
     item.render();
   }
+
   deleteItem(instance) {
     this.itemsArr = this.itemsArr.filter( item => item !== instance );
     this.render();
   }
+
   getAll() {
     this.render();
   }
+
   getActive() {
     let temp = this.itemsArr;
     this.itemsArr = this.itemsArr.filter( item => !item.checked );
     this.render();
     this.itemsArr = temp;
   }
+
   getCompleted() {
     let temp = this.itemsArr;
     this.itemsArr = this.itemsArr.filter( item => item.checked );
     this.render();
     this.itemsArr = temp;
   }
+
   deleteCompleted() {
     this.itemsArr = this.itemsArr.filter(item => !item.checked );
     this.render();
   }
+
   render() {
     this.elem.innerHTML = '';
-    let that = this;
-    that.itemsArr.forEach( function(item) {
-      that.elem.appendChild(item.render());
+    this.itemsArr.forEach( (item) => {
+      this.elem.appendChild(item.render());
     });
     return this.elem;
   }
 }
 
-class ToDoItem extends CommonParent {
+class ToDoItem extends BaseComponent {
+
   constructor(value, checked, edit, list){
     super('li');
     this.value = value;
@@ -152,9 +165,9 @@ class ToDoItem extends CommonParent {
     this.list = list;
     this.template = `<i class="fa fa-hand-o-right"></i>
                      {{#if edit}}
-                        <input type="text" value="{{value}}" class="int-el"/>
+                        <input type="text" value="{{ value }}" class="int-el"/>
                      {{else}}
-                        <span class="{{ tern checked 'checked' '' '' }}">{{value}}</span>
+                        <span class="{{ tern checked true 'checked' '' }}">{{value}}</span>
                      {{/if}}
                      <div class="toolBar">
                         <button class="check" title="Click to check todo"><i class="fa fa-check"></i></button>
@@ -171,26 +184,26 @@ class ToDoItem extends CommonParent {
     this.render();
     return false;
   }
+
   setEdit() {
     this.edit = !this.edit;
     this.render();
     return false;
   }
+
   render() {
     this.elem.className = 'view';
     this.elem.innerHTML = this.compile();
-    let instance = this;
-    let parentList = this.list;
-    this.elem.querySelector('.check').onclick = function(){
-      instance.setChecked();
+    this.elem.querySelector('.check').onclick = () => {
+      this.setChecked();
     };
-    this.elem.querySelector('.edit').onclick = function() {
-      if (instance.edit) instance.value = instance.elem.querySelector('.int-el').value;
-      instance.setEdit();
+    this.elem.querySelector('.edit').onclick = () => {
+      if (this.edit) this.value = this.elem.querySelector('.int-el').value;
+      this.setEdit();
     };
-    this.elem.querySelector('.del').onclick = function() {
-      parentList.deleteItem(instance);
-      instance.render();
+    this.elem.querySelector('.del').onclick = () => {
+      this.list.deleteItem(this);
+      this.render();
     };
     return this.elem;
   }
