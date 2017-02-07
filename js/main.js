@@ -1,11 +1,26 @@
-class InputForm {
+Handlebars.registerHelper('tern', function (result, value1, value2, forCompare) {
+  if(forCompare.trim() !== '') return result === forCompare ? value1 : value2;
+  else return result ? value1 : value2;
+});
+
+class CommonParent {
+  constructor(containerElement) {
+    this.template;
+    this.elem = document.createElement(containerElement);
+  }
+  compile() {
+    return Handlebars.compile(this.template)(this);
+  }
+}
+
+class InputForm extends CommonParent {
   constructor(name, list) {
+    super('div');
     this.name = name;
     this.list = list;
-    this.elem = document.getElementById('head');
-    this.template = `<div class='hat'><h1>{{nameOfList}}</h1></div>
-                     <input type='text' placeholder='Add task here' class='input-text'/>
-                     <button class='add-button'><i class='fa fa-plus'></i></button>`;
+    this.template = `<div class="hat"><h1>{{ name }}</h1></div>
+                     <input type="text" placeholder="Add task here" class="input-text"/>
+                     <button class="add-button"><i class="fa fa-plus"></i></button>`;
   }
   sendNewItem(value) {
     if(!value.trim()) return false;
@@ -13,7 +28,7 @@ class InputForm {
     this.list.render();
   }
   render() {
-    this.elem.innerHTML = Handlebars.compile(this.template)({'nameOfList': this.name});
+    this.elem.innerHTML = this.compile();
     this.elem.querySelector('.input-text').focus();
     let that = this;
     this.elem.querySelector('.add-button').onclick = function() {
@@ -32,34 +47,30 @@ class InputForm {
   }
 }
 
-class FooterOfList {
+class FooterOfList extends CommonParent {
   constructor(str) {
+    super('div');
     this.str = str;
-    this.elem = document.getElementById('lower_signature');
-    this.template = '<p>{{str}}</p>';
+    this.template = '<p>{{ str }}</p>';
   }
   render() {
-    this.elem.innerHTML = Handlebars.compile(this.template)({'str': this.str});
+    this.elem.innerHTML = this.compile();
     return this.elem;
   }
 }
 
-class FiltersOfList {
+class FiltersOfList extends CommonParent {
   constructor(list) {
+    super('ul');
     this.list = list;
-    this.elem = document.getElementById('filters-list');
-    this.template = `<li><button id='get_all' class='{{filteredButtonAllClass}}'>All</button></li>
-                     <li><button id='get_active' class='{{filteredButtonActiveClass}}'>Active</button></li>
-                     <li><button id='get_completed' class='{{filteredButtonCompletedClass}}'>Completed</button></li>
-                     <li><button id='clear_completed'>Clear completed</button></li>`;
     this.currentFilter = '';
+    this.template = `<li><button id="get_all" class="{{ tern currentFilter 'filtered-button' '' 'All' }}">All</button></li>
+                     <li><button id="get_active" class="{{ tern currentFilter 'filtered-button' '' 'Active' }}">Active</button></li>
+                     <li><button id='get_completed' class="{{ tern currentFilter 'filtered-button' '' 'Completed' }}">Completed</button></li>
+                     <li><button id="clear_completed">Clear completed</button></li>`;
   }
   render() {
-    this.elem.innerHTML = Handlebars.compile(this.template)({
-      'filteredButtonAllClass': this.currentFilter === 'All' ? 'filtered-button' : '',
-      'filteredButtonActiveClass': this.currentFilter === 'Active' ? 'filtered-button' : '',
-      'filteredButtonCompletedClass': this.currentFilter === 'Completed' ? 'filtered-button' : ''
-    });
+    this.elem.innerHTML = this.compile();
     let tempList = this.list;
     let that = this;
     this.elem.querySelector('#get_all').onclick = function (){
@@ -90,9 +101,9 @@ class FiltersOfList {
   }
 }
 
-class ToDoList {
+class ToDoList extends CommonParent {
   constructor() {
-    this.elem = document.getElementById('tList');
+    super('ul');
     this.itemsArr = [];
   }
   addNewItem(item) {
@@ -132,27 +143,27 @@ class ToDoList {
   }
 }
 
-class ToDoItem {
+class ToDoItem extends CommonParent {
   constructor(value, checked, edit, list){
+    super('li');
     this.value = value;
     this.checked = checked;
     this.edit = edit;
     this.list = list;
-    this.elem = document.createElement('li');
-    this.template = `<i class='fa fa-hand-o-right'></i>
-                     {{#if editCh}}
-                        <input type = 'text' value = '{{value}}' class = 'int-el'/>
+    this.template = `<i class="fa fa-hand-o-right"></i>
+                     {{#if edit}}
+                        <input type="text" value="{{value}}" class="int-el"/>
                      {{else}}
-                        <span class='{{checkCh}}'>{{value}}</span>
+                        <span class="{{ tern checked 'checked' '' '' }}">{{value}}</span>
                      {{/if}}
-                     <div class='toolBar'>
-                        <button class='check' title='Click to check todo'><i class='fa fa-check'></i></button>
-                        {{#if editCh}}
-                          <button class='edit' title='Click to save edition'><i class='fa fa-check-circle-o'></i></button>
+                     <div class="toolBar">
+                        <button class="check" title="Click to check todo"><i class="fa fa-check"></i></button>
+                        {{#if edit}}
+                          <button class="edit" title="Click to save edition"><i class="fa fa-check-circle-o"></i></button>
                         {{else}}
-                          <button class='edit' title='Click to edit todo'><i class='fa fa-pencil-square-o'></i></button>
+                          <button class="edit" title="Click to edit todo"><i class="fa fa-pencil-square-o"></i></button>
                         {{/if}}
-                        <button class='del' title='Click to delete todo'><i class='fa fa-times''></i></button>
+                        <button class="del" title="Click to delete todo"><i class="fa fa-times"></i></button>
                      </div>`;
   }
   setChecked() {
@@ -167,11 +178,7 @@ class ToDoItem {
   }
   render() {
     this.elem.className = 'view';
-    this.elem.innerHTML = Handlebars.compile(this.template)({
-      'editCh': this.edit,
-      'value': this.value,
-      'checkCh': this.checked ? 'checked' : ''
-    });
+    this.elem.innerHTML = this.compile();
     let instance = this;
     let parentList = this.list;
     this.elem.querySelector('.check').onclick = function(){
@@ -193,6 +200,7 @@ let myToDoList = new ToDoList();
 let myInputForm = new InputForm('toDos', myToDoList);
 let myFilterOfList = new FiltersOfList(myToDoList);
 let myFooterOfList = new FooterOfList('Press Enter to add todo');
+
 
 document.getElementsByTagName('header')[0].appendChild(myInputForm.render());
 document.getElementsByTagName('main')[0].appendChild(myToDoList.render());
