@@ -1,5 +1,0 @@
-https://www.npmjs.com/package/babel-loader
-
-https://www.youtube.com/user/iliakan/videos
-
-http://webpack.github.io/docs/configuration.html
