@@ -3,11 +3,12 @@ import { ToDoList } from './ToDoList';
 import { FiltersOfList } from './FiltersOfList';
 import { FooterOfList } from './FooterOfList';
 import { ToDoItem } from './ToDoItem';
+import { BaseComponent } from './BaseComponent';
 
-export class MainComponent {
+export class MainComponent extends BaseComponent {
 
   constructor() {
-    this.elem = document.createElement('main');
+    super('main');
     this.myToDoList = new ToDoList();
     this.myInputForm = new InputForm('toDos', this.myToDoList);
     this.myFilterOfList = new FiltersOfList(this.myToDoList);

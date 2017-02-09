@@ -428,7 +428,7 @@ var ToDoList = exports.ToDoList = function (_BaseComponent) {
 
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.MainComponent = undefined;
 
@@ -444,32 +444,42 @@ var _FooterOfList = __webpack_require__(4);
 
 var _ToDoItem = __webpack_require__(2);
 
+var _BaseComponent2 = __webpack_require__(0);
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var MainComponent = exports.MainComponent = function () {
-	function MainComponent() {
-		_classCallCheck(this, MainComponent);
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-		this.elem = document.createElement('main');
-		this.myToDoList = new _ToDoList.ToDoList();
-		this.myInputForm = new _InputForm.InputForm('toDos', this.myToDoList);
-		this.myFilterOfList = new _FiltersOfList.FiltersOfList(this.myToDoList);
-		this.myFooterOfList = new _FooterOfList.FooterOfList('Press Enter to add todo');
-	}
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	_createClass(MainComponent, [{
-		key: 'render',
-		value: function render() {
-			this.elem.appendChild(this.myInputForm.render());
-			this.elem.appendChild(this.myToDoList.render());
-			this.elem.appendChild(this.myFilterOfList.render());
-			this.elem.appendChild(this.myFooterOfList.render());
-			return this.elem;
-		}
-	}]);
+var MainComponent = exports.MainComponent = function (_BaseComponent) {
+  _inherits(MainComponent, _BaseComponent);
 
-	return MainComponent;
-}();
+  function MainComponent() {
+    _classCallCheck(this, MainComponent);
+
+    var _this = _possibleConstructorReturn(this, (MainComponent.__proto__ || Object.getPrototypeOf(MainComponent)).call(this, 'main'));
+
+    _this.myToDoList = new _ToDoList.ToDoList();
+    _this.myInputForm = new _InputForm.InputForm('toDos', _this.myToDoList);
+    _this.myFilterOfList = new _FiltersOfList.FiltersOfList(_this.myToDoList);
+    _this.myFooterOfList = new _FooterOfList.FooterOfList('Press Enter to add todo');
+    return _this;
+  }
+
+  _createClass(MainComponent, [{
+    key: 'render',
+    value: function render() {
+      this.elem.appendChild(this.myInputForm.render());
+      this.elem.appendChild(this.myToDoList.render());
+      this.elem.appendChild(this.myFilterOfList.render());
+      this.elem.appendChild(this.myFooterOfList.render());
+      return this.elem;
+    }
+  }]);
+
+  return MainComponent;
+}(_BaseComponent2.BaseComponent);
 
 /***/ }),
 /* 7 */
