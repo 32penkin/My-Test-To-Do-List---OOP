@@ -1,18 +1,20 @@
-const BaseComponent = require('./BaseComponent');
+import { BaseComponent } from './BaseComponent';
+import { handlebarsTernHelper } from './helpers';
 
-class FiltersOfList extends BaseComponent {
+export class FiltersOfList extends BaseComponent {
 
   constructor(list) {
-    super('ul');
+    super('footer');
     this.list = list;
     this.currentFilter = '';
-    this.template = `<li><button id="get_all" class="{{ tern currentFilter 'All' 'filtered-button' '' }}">All</button></li>
+    this.template = `<ul><li><button id="get_all" class="{{ tern currentFilter 'All' 'filtered-button' '' }}">All</button></li>
                      <li><button id="get_active" class="{{ tern currentFilter 'Active' 'filtered-button' '' }}">Active</button></li>
                      <li><button id='get_completed' class="{{ tern currentFilter 'Completed' 'filtered-button' '' }}">Completed</button></li>
-                     <li><button id="clear_completed">Clear completed</button></li>`;
+                     <li><button id="clear_completed">Clear completed</button></li></ul>`;
   }
 
   render() {
+    this.elem.className = 'foot';
     this.elem.innerHTML = this.compile();
     this.elem.querySelector('#get_all').onclick = () => {
       this.currentFilter = 'All';
@@ -41,5 +43,3 @@ class FiltersOfList extends BaseComponent {
     return this.elem;
   }
 }
-
-module.exports = FiltersOfList;

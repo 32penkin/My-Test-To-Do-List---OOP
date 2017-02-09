@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,15 +73,15 @@
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-Handlebars.registerHelper('tern', function (value, equal, value1, value2) {
-  return value === equal ? value1 : value2;
-});
-
-var BaseComponent = function () {
+var BaseComponent = exports.BaseComponent = function () {
   function BaseComponent(containerElement) {
     _classCallCheck(this, BaseComponent);
 
@@ -90,7 +90,7 @@ var BaseComponent = function () {
   }
 
   _createClass(BaseComponent, [{
-    key: 'compile',
+    key: "compile",
     value: function compile() {
       return Handlebars.compile(this.template)(this);
     }
@@ -99,8 +99,6 @@ var BaseComponent = function () {
   return BaseComponent;
 }();
 
-module.exports = BaseComponent;
-
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -108,7 +106,35 @@ module.exports = BaseComponent;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.attachMainComponent = attachMainComponent;
+function attachMainComponent(component) {
+  document.getElementsByTagName('body')[0].appendChild(component);
+}
+
+var handlebarsTernHelper = exports.handlebarsTernHelper = Handlebars.registerHelper('tern', function (value, equal, value1, value2) {
+  return value === equal ? value1 : value2;
+});
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ToDoItem = undefined;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _BaseComponent2 = __webpack_require__(0);
+
+var _helpers = __webpack_require__(1);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -116,9 +142,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var BaseComponent = __webpack_require__(0);
-
-var ToDoItem = function (_BaseComponent) {
+var ToDoItem = exports.ToDoItem = function (_BaseComponent) {
   _inherits(ToDoItem, _BaseComponent);
 
   function ToDoItem(value, checked, edit, list) {
@@ -171,18 +195,25 @@ var ToDoItem = function (_BaseComponent) {
   }]);
 
   return ToDoItem;
-}(BaseComponent);
-
-module.exports = ToDoItem;
+}(_BaseComponent2.BaseComponent);
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.FiltersOfList = undefined;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _BaseComponent2 = __webpack_require__(0);
+
+var _helpers = __webpack_require__(1);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -190,19 +221,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var BaseComponent = __webpack_require__(0);
-
-var FiltersOfList = function (_BaseComponent) {
+var FiltersOfList = exports.FiltersOfList = function (_BaseComponent) {
   _inherits(FiltersOfList, _BaseComponent);
 
   function FiltersOfList(list) {
     _classCallCheck(this, FiltersOfList);
 
-    var _this = _possibleConstructorReturn(this, (FiltersOfList.__proto__ || Object.getPrototypeOf(FiltersOfList)).call(this, 'ul'));
+    var _this = _possibleConstructorReturn(this, (FiltersOfList.__proto__ || Object.getPrototypeOf(FiltersOfList)).call(this, 'footer'));
 
     _this.list = list;
     _this.currentFilter = '';
-    _this.template = '<li><button id="get_all" class="{{ tern currentFilter \'All\' \'filtered-button\' \'\' }}">All</button></li>\n                     <li><button id="get_active" class="{{ tern currentFilter \'Active\' \'filtered-button\' \'\' }}">Active</button></li>\n                     <li><button id=\'get_completed\' class="{{ tern currentFilter \'Completed\' \'filtered-button\' \'\' }}">Completed</button></li>\n                     <li><button id="clear_completed">Clear completed</button></li>';
+    _this.template = '<ul><li><button id="get_all" class="{{ tern currentFilter \'All\' \'filtered-button\' \'\' }}">All</button></li>\n                     <li><button id="get_active" class="{{ tern currentFilter \'Active\' \'filtered-button\' \'\' }}">Active</button></li>\n                     <li><button id=\'get_completed\' class="{{ tern currentFilter \'Completed\' \'filtered-button\' \'\' }}">Completed</button></li>\n                     <li><button id="clear_completed">Clear completed</button></li></ul>';
     return _this;
   }
 
@@ -211,6 +240,7 @@ var FiltersOfList = function (_BaseComponent) {
     value: function render() {
       var _this2 = this;
 
+      this.elem.className = 'foot';
       this.elem.innerHTML = this.compile();
       this.elem.querySelector('#get_all').onclick = function () {
         _this2.currentFilter = 'All';
@@ -241,18 +271,23 @@ var FiltersOfList = function (_BaseComponent) {
   }]);
 
   return FiltersOfList;
-}(BaseComponent);
-
-module.exports = FiltersOfList;
+}(_BaseComponent2.BaseComponent);
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.FooterOfList = undefined;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _BaseComponent2 = __webpack_require__(0);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -260,9 +295,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var BaseComponent = __webpack_require__(0);
-
-var FooterOfList = function (_BaseComponent) {
+var FooterOfList = exports.FooterOfList = function (_BaseComponent) {
   _inherits(FooterOfList, _BaseComponent);
 
   function FooterOfList(str) {
@@ -278,82 +311,14 @@ var FooterOfList = function (_BaseComponent) {
   _createClass(FooterOfList, [{
     key: 'render',
     value: function render() {
+      this.elem.className = 'last-foot';
       this.elem.innerHTML = this.compile();
       return this.elem;
     }
   }]);
 
   return FooterOfList;
-}(BaseComponent);
-
-module.exports = FooterOfList;
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var BaseComponent = __webpack_require__(0);
-var ToDoItem = __webpack_require__(1);
-
-var InputForm = function (_BaseComponent) {
-  _inherits(InputForm, _BaseComponent);
-
-  function InputForm(name, list) {
-    _classCallCheck(this, InputForm);
-
-    var _this = _possibleConstructorReturn(this, (InputForm.__proto__ || Object.getPrototypeOf(InputForm)).call(this, 'div'));
-
-    _this.name = name;
-    _this.list = list;
-    _this.template = '<div class="hat"><h1>{{ name }}</h1></div>\n                     <input type="text" placeholder="Add task here" class="input-text"/>\n                     <button class="add-button"><i class="fa fa-plus"></i></button>';
-    return _this;
-  }
-
-  _createClass(InputForm, [{
-    key: 'sendNewItem',
-    value: function sendNewItem(value) {
-      if (!value.trim()) return false;
-      this.list.addNewItem(new ToDoItem(value, false, false, this.list));
-      this.list.render();
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this2 = this;
-
-      this.elem.innerHTML = this.compile();
-      this.elem.querySelector('.input-text').focus();
-      this.elem.querySelector('.add-button').onclick = function () {
-        _this2.sendNewItem(_this2.elem.querySelector('.input-text').value);
-        _this2.elem.querySelector('.input-text').focus();
-        _this2.elem.querySelector('.input-text').select();
-      };
-      this.elem.querySelector('.input-text').onkeyup = function (event) {
-        if (event.which === 13) {
-          _this2.sendNewItem(_this2.elem.querySelector('.input-text').value);
-          _this2.elem.querySelector('.input-text').focus();
-          _this2.elem.querySelector('.input-text').select();
-        }
-      };
-      return this.elem;
-    }
-  }]);
-
-  return InputForm;
-}(BaseComponent);
-
-module.exports = InputForm;
+}(_BaseComponent2.BaseComponent);
 
 /***/ }),
 /* 5 */
@@ -362,7 +327,16 @@ module.exports = InputForm;
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ToDoList = undefined;
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _BaseComponent2 = __webpack_require__(0);
+
+var _ToDoItem = __webpack_require__(2);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -370,9 +344,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var BaseComponent = __webpack_require__(0);
-
-var ToDoList = function (_BaseComponent) {
+var ToDoList = exports.ToDoList = function (_BaseComponent) {
   _inherits(ToDoList, _BaseComponent);
 
   function ToDoList() {
@@ -437,6 +409,7 @@ var ToDoList = function (_BaseComponent) {
       var _this2 = this;
 
       this.elem.innerHTML = '';
+      this.elem.className = 'main';
       this.itemsArr.forEach(function (item) {
         _this2.elem.appendChild(item.render());
       });
@@ -445,9 +418,7 @@ var ToDoList = function (_BaseComponent) {
   }]);
 
   return ToDoList;
-}(BaseComponent);
-
-module.exports = ToDoList;
+}(_BaseComponent2.BaseComponent);
 
 /***/ }),
 /* 6 */
@@ -456,21 +427,140 @@ module.exports = ToDoList;
 "use strict";
 
 
-var InputForm = __webpack_require__(4);
-var ToDoList = __webpack_require__(5);
-var FiltersOfList = __webpack_require__(2);
-var FooterOfList = __webpack_require__(3);
-var ToDoItem = __webpack_require__(1);
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.MainComponent = undefined;
 
-var myToDoList = new ToDoList();
-var myInputForm = new InputForm('toDos', myToDoList);
-var myFilterOfList = new FiltersOfList(myToDoList);
-var myFooterOfList = new FooterOfList('Press Enter to add todo');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-document.getElementsByTagName('header')[0].appendChild(myInputForm.render());
-document.getElementsByTagName('main')[0].appendChild(myToDoList.render());
-document.getElementsByTagName('footer')[0].appendChild(myFilterOfList.render());
-document.getElementsByTagName('footer')[1].appendChild(myFooterOfList.render());
+var _InputForm = __webpack_require__(7);
+
+var _ToDoList = __webpack_require__(5);
+
+var _FiltersOfList = __webpack_require__(3);
+
+var _FooterOfList = __webpack_require__(4);
+
+var _ToDoItem = __webpack_require__(2);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var MainComponent = exports.MainComponent = function () {
+	function MainComponent() {
+		_classCallCheck(this, MainComponent);
+
+		this.elem = document.createElement('main');
+		this.myToDoList = new _ToDoList.ToDoList();
+		this.myInputForm = new _InputForm.InputForm('toDos', this.myToDoList);
+		this.myFilterOfList = new _FiltersOfList.FiltersOfList(this.myToDoList);
+		this.myFooterOfList = new _FooterOfList.FooterOfList('Press Enter to add todo');
+	}
+
+	_createClass(MainComponent, [{
+		key: 'render',
+		value: function render() {
+			this.elem.appendChild(this.myInputForm.render());
+			this.elem.appendChild(this.myToDoList.render());
+			this.elem.appendChild(this.myFilterOfList.render());
+			this.elem.appendChild(this.myFooterOfList.render());
+			return this.elem;
+		}
+	}]);
+
+	return MainComponent;
+}();
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.InputForm = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _BaseComponent2 = __webpack_require__(0);
+
+var _ToDoList = __webpack_require__(5);
+
+var _FiltersOfList = __webpack_require__(3);
+
+var _FooterOfList = __webpack_require__(4);
+
+var _ToDoItem = __webpack_require__(2);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var InputForm = exports.InputForm = function (_BaseComponent) {
+  _inherits(InputForm, _BaseComponent);
+
+  function InputForm(name, list) {
+    _classCallCheck(this, InputForm);
+
+    var _this = _possibleConstructorReturn(this, (InputForm.__proto__ || Object.getPrototypeOf(InputForm)).call(this, 'header'));
+
+    _this.name = name;
+    _this.list = list;
+    _this.template = '<div class="hat"><h1>{{ name }}</h1></div>\n                     <input type="text" placeholder="Add task here" class="input-text"/>\n                     <button class="add-button"><i class="fa fa-plus"></i></button>';
+    return _this;
+  }
+
+  _createClass(InputForm, [{
+    key: 'sendNewItem',
+    value: function sendNewItem(value) {
+      if (!value.trim()) return false;
+      this.list.addNewItem(new _ToDoItem.ToDoItem(value, false, false, this.list));
+      this.list.render();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      this.elem.className = 'header';
+      this.elem.innerHTML = this.compile();
+      this.elem.querySelector('.input-text').focus();
+      this.elem.querySelector('.add-button').onclick = function () {
+        _this2.sendNewItem(_this2.elem.querySelector('.input-text').value);
+        _this2.elem.querySelector('.input-text').focus();
+        _this2.elem.querySelector('.input-text').select();
+      };
+      this.elem.querySelector('.input-text').onkeyup = function (event) {
+        if (event.which === 13) {
+          _this2.sendNewItem(_this2.elem.querySelector('.input-text').value);
+          _this2.elem.querySelector('.input-text').focus();
+          _this2.elem.querySelector('.input-text').select();
+        }
+      };
+      return this.elem;
+    }
+  }]);
+
+  return InputForm;
+}(_BaseComponent2.BaseComponent);
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _MainComponent = __webpack_require__(6);
+
+var _helpers = __webpack_require__(1);
+
+(0, _helpers.attachMainComponent)(new _MainComponent.MainComponent().render());
 
 /***/ })
 /******/ ]);

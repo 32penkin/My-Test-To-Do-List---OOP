@@ -1,6 +1,7 @@
-const BaseComponent = require('./BaseComponent');
+import { BaseComponent } from './BaseComponent';
+import { handlebarsTernHelper } from './helpers';
 
-class ToDoItem extends BaseComponent {
+export class ToDoItem extends BaseComponent {
 
   constructor(value, checked, edit, list){
     super('li');
@@ -53,5 +54,3 @@ class ToDoItem extends BaseComponent {
     return this.elem;
   }
 }
-
-module.exports = ToDoItem;

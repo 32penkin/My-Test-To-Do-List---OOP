@@ -1,8 +1,4 @@
-Handlebars.registerHelper('tern', function (value, equal, value1, value2) {
-  return value === equal ? value1 : value2;
-});
-
-class BaseComponent {
+export class BaseComponent {
 
   constructor(containerElement) {
     this.template;
@@ -13,5 +9,3 @@ class BaseComponent {
     return Handlebars.compile(this.template)(this);
   }
 }
-
-module.exports = BaseComponent;

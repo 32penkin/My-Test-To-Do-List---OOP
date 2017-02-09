@@ -22,12 +22,12 @@ button, input[type="button"] {
 
 
 /*---------------------------------INPUT SECTION------------------------*/
-header {
+main header {
  	/*border: 2px solid black;*/
 	text-align: center;
  }
 
-header input::input-placeholder:focus {
+main header input::input-placeholder:focus {
 	font-style: italic;
 	font-weight: 300;
 	color: #e6e6e6;
@@ -170,26 +170,16 @@ li:hover .toolBar {
 	margin-bottom: auto; 
 }
 
-/*----------------------------------------------------------------*/
-
-#empty_message {
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	font-size: 13px;
-	display: none;
-}
-
 /*-----------------------------FOOTER-----------------------------*/
 
-.foot{
+main .foot{
 /*border: 2px solid black;*/
 position: relative;
-overflow:hidden;
+overflow: hidden;
 margin:15px 0
 }
 
-.foot ul {
+main .foot ul {
 list-style:none;
 margin:0;
 padding:0;
@@ -198,7 +188,7 @@ left:50%;
 float:left;
 }
 
-.foot ul li {
+main .foot ul li {
 position:relative;
 left:-50%;
 float:left;
@@ -209,6 +199,7 @@ margin:0 10px;
 	border: 1.5px solid #5b3416;
 }
 
+/*-----------------------------FOOTER-----------------------------*/
 .last-foot {
 	
 	text-align: center;

@@ -1,6 +1,6 @@
-const BaseComponent = require('./BaseComponent');
+import { BaseComponent } from './BaseComponent';
 
-class FooterOfList extends BaseComponent {
+export class FooterOfList extends BaseComponent {
 
   constructor(str) {
     super('div');
@@ -9,9 +9,8 @@ class FooterOfList extends BaseComponent {
   }
 
   render() {
+  	this.elem.className = 'last-foot';
     this.elem.innerHTML = this.compile();
     return this.elem;
   }
 }
-
-module.exports = FooterOfList;

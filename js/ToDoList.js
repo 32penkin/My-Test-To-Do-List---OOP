@@ -1,6 +1,7 @@
-const BaseComponent = require('./BaseComponent');
+import { BaseComponent } from './BaseComponent';
+import { ToDoItem } from './ToDoItem';
 
-class ToDoList extends BaseComponent {
+export class ToDoList extends BaseComponent {
 
   constructor() {
     super('ul');
@@ -42,11 +43,10 @@ class ToDoList extends BaseComponent {
 
   render() {
     this.elem.innerHTML = '';
+    this.elem.className = 'main';
     this.itemsArr.forEach( (item) => {
       this.elem.appendChild(item.render());
     });
     return this.elem;
   }
 }
-
-module.exports = ToDoList;

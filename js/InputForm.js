@@ -1,10 +1,13 @@
-const BaseComponent = require('./BaseComponent');
-const ToDoItem = require('./ToDoItem');
+import { BaseComponent } from'./BaseComponent';
+import { ToDoList } from './ToDoList';
+import { FiltersOfList } from './FiltersOfList';
+import { FooterOfList } from './FooterOfList';
+import { ToDoItem } from './ToDoItem';
 
-class InputForm extends BaseComponent {
+export class InputForm extends BaseComponent {
 
   constructor(name, list) {
-    super('div');
+    super('header');
     this.name = name;
     this.list = list;
     this.template = `<div class="hat"><h1>{{ name }}</h1></div>
@@ -19,6 +22,7 @@ class InputForm extends BaseComponent {
   }
 
   render() {
+    this.elem.className = 'header';
     this.elem.innerHTML = this.compile();
     this.elem.querySelector('.input-text').focus();
     this.elem.querySelector('.add-button').onclick = () => {
@@ -36,5 +40,3 @@ class InputForm extends BaseComponent {
     return this.elem;
   }
 }
-
-module.exports = InputForm;
