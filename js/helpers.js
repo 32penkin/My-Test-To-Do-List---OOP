@@ -1,4 +1,4 @@
-
+import * as Handlebars from 'handlebars';
 export function attachMainComponent(component) {
 	document.getElementsByTagName('body')[0].appendChild(component);
 }

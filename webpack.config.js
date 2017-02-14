@@ -20,13 +20,28 @@ module.exports = {
     {
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?.*$|$)/,
       loader: 'file-loader'
-    }
+    },
+    { test: /\.handlebars$/, loader: "handlebars-loader" },
+    { test: /\.json$/, loader: 'json-loader' }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: 'My ToDoList',
-      filename: 'dist/index.html'
+      filename: 'index.html'
     })
-  ]
+  ],
+  node: {
+    fs: 'empty'
+  },
+  resolve: {
+    alias: {
+      handlebars: 'handlebars/dist/handlebars.min.js'
+    }
+  },
+  devServer: {
+    host: 'localhost',
+    port: 8080,
+    contentBase: __dirname + '/dist'
+  }
 }

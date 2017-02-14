@@ -1,3 +1,4 @@
+import * as Handlebars from 'handlebars';
 export class BaseComponent {
 
   constructor(containerElement) {
