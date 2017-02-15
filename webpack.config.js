@@ -1,6 +1,6 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-	entry: "./main",
+	entry: "./src/main",
   output: {
     path: __dirname + "/dist",
     filename: "build.js"
@@ -21,7 +21,6 @@ module.exports = {
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?.*$|$)/,
       loader: 'file-loader'
     },
-    { test: /\.handlebars$/, loader: "handlebars-loader" },
     { test: /\.json$/, loader: 'json-loader' }
     ]
   },
