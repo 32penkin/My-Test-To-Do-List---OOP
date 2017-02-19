@@ -9,14 +9,14 @@ export class ToDoItem extends BaseComponent {
     this.checked = checked;
     this.edit = edit;
     this.list = list;
-    this.template = `<label class="labelll">
+    this.template = `<label class="label-for-check">
                         <input type="checkbox" class="check" {{ tern checked true 'checked' '' }}>
                         <span class="pseudo-checkbox"><i class="fa fa-check"></i></span>
                      </label>
                      {{#if edit}}
                         <input type="text" value="{{ value }}" class="int-el"/>
                      {{else}}
-                        <span class="{{ tern checked true 'checked' '' }}">{{value}}</span>
+                        <span class="{{ tern checked true 'checked' '' }}" id="toDoSpan">{{value}}</span>
                      {{/if}}
                      <div class="toolBar">
                         {{#if edit}}

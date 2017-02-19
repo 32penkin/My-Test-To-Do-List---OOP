@@ -58,20 +58,22 @@ input[type="checkbox"] + span i {
 input[type="checkbox"]:checked + span i {
   opacity: 1;
 }
-
+main {
+  background: url(line.png) repeat-y;
+}
 
 body {
   background-color: #f6f3f3;
   main {
     background-color: #ffffff;
     margin: 87px auto;
-    width: 250.67px;
+    width: 250px;
     border: 1.5px solid #d1cfcf;
     header {
       width: 100%;
       margin-bottom: 3px;
       border-bottom: 1.2px solid #e6ebed;
-      padding-bottom: 5px;
+      padding-bottom: 2px;
       label{
         padding-left: 10px;
        .check-all {
@@ -80,7 +82,7 @@ body {
        }
       }
       .input-text {
-        padding-left: 10px;
+        margin-left: 20px;
         display: inline-block;
         vertical-align: middle;
         border: none;
@@ -90,7 +92,7 @@ body {
       .add-button {
         display: inline-block;
         vertical-align: middle;
-        margin-left: 23px;
+        margin-left: 15px;
         @include buttons_style;
       }
     }
@@ -100,17 +102,21 @@ body {
       }
       .view {
         height: 22px;
-        padding-left: 0;
         border-bottom: 1.2px solid #e6ebed;
-        .check {
+        label {
           display: inline-block;
           vertical-align: middle;
+          padding-left: 10px;
+          .pseudo-checkbox{
+            display: inline-block;
+            vertical-align: middle;
+          }
         }
-        span {
+        #toDoSpan {
           display: inline-block;
           vertical-align: middle;
-          margin-left: 10px;
           @include primary_font;
+          padding-left: 19px;
         }
         .int-el {
           display: inline-block;
@@ -118,9 +124,9 @@ body {
           width: 80px;
           height: 12px;
           margin: auto;
+          margin-left: 19px;
           @include primary_font;
           font-style: italic;
-          padding-left: 18px;
         }
         .toolBar {
           width: 42px;
@@ -148,7 +154,8 @@ body {
     .foot {
       position: relative;
       overflow: hidden;
-      margin: 3px 0 5px 0;
+      margin: 3px 0 5px 5px;
+      padding-left: 20px;
       ul {
         list-style: none;
         margin: 0;
