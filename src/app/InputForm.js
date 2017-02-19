@@ -10,7 +10,10 @@ export class InputForm extends BaseComponent {
     super('header');
     this.name = name;
     this.list = list;
-    this.template = `<div class="hat"><h1>{{ name }}</h1></div>
+    this.template = `<label class="labelll">
+                        <input type="checkbox" class="check-all">
+                        <span class="pseudo-checkbox"><i class="fa fa-check"></i></span>
+                     </label>
                      <input type="text" placeholder="Add task here" class="input-text"/>
                      <button class="add-button"><i class="fa fa-plus"></i></button>`;
   }
@@ -25,6 +28,11 @@ export class InputForm extends BaseComponent {
     this.elem.className = 'header';
     this.elem.innerHTML = this.compile();
     this.elem.querySelector('.input-text').focus();
+    this.elem.querySelector('.check-all').onchange = () => {
+      this.list.itemsArr.forEach( (item) => {
+        item.setChecked();
+      });
+    }
     this.elem.querySelector('.add-button').onclick = () => {
       this.sendNewItem(this.elem.querySelector('.input-text').value);
       this.elem.querySelector('.input-text').focus();

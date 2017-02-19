@@ -9,9 +9,9 @@ export class MainComponent {
 	constructor() {
 		this.elem = document.createElement('main');
 		this.myToDoList = new ToDoList();
-		this.myInputForm = new InputForm('toDos', this.myToDoList);
+		this.myInputForm = new InputForm('', this.myToDoList);
 		this.myFilterOfList = new FiltersOfList(this.myToDoList);
-		this.myFooterOfList = new FooterOfList('Press Enter to add todo');
+		this.myFooterOfList = new FooterOfList('');
 	}
 
 	render() {
