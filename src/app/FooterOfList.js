@@ -9,7 +9,7 @@ export class FooterOfList extends BaseComponent {
   }
 
   render() {
-  	this.elem.className = 'last-foot';
+    this.elem.className = 'last-foot';
     this.elem.innerHTML = this.compile();
     return this.elem;
   }
