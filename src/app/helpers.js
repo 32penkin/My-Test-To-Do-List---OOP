@@ -1,6 +1,8 @@
 import * as Handlebars from 'handlebars';
+import $ from 'jquery';
+
 export function attachMainComponent(component) {
-  document.getElementsByTagName('body')[0].appendChild(component);
+  $('body')[0].append(component);
 }
 
 export const handlebarsTernHelper = Handlebars.registerHelper('tern', function (value, equal, value1, value2) {

@@ -1,5 +1,5 @@
 import { BaseComponent } from './BaseComponent';
-import { handlebarsTernHelper } from './helpers';
+import $ from 'jquery';
 
 export class FiltersOfList extends BaseComponent {
 
@@ -11,10 +11,10 @@ export class FiltersOfList extends BaseComponent {
                      <li><button id="get_active" class="{{ tern currentFilter 'Active' 'filtered-button' '' }}">Active</button></li>
                      <li><button id='get_completed' class="{{ tern currentFilter 'Completed' 'filtered-button' '' }}">Completed</button></li>
                      <li><button id="clear_completed">Clear completed</button></li></ul>`;
-  }
+  };
 
   render() {
-    this.elem.className = 'foot';
+    this.elem.className = 'footer';
     this.elem.innerHTML = this.compile();
     this.elem.querySelector('#get_all').onclick = () => {
       this.currentFilter = 'All';
