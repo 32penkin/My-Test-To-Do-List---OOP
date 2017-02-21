@@ -1,10 +1,9 @@
-import { BaseComponent } from './BaseComponent';
-import { ToDoItem } from './ToDoItem';
+import {BaseComponent} from './BaseComponent';
 
 export class ToDoList extends BaseComponent {
 
   constructor() {
-    super('ul');
+    super('<ul>');
     this.itemsArr = [];
   }
 
@@ -14,7 +13,7 @@ export class ToDoList extends BaseComponent {
   }
 
   deleteItem(instance) {
-    this.itemsArr = this.itemsArr.filter( item => item !== instance );
+    this.itemsArr = this.itemsArr.filter(item => item !== instance);
     this.render();
   }
 
@@ -24,28 +23,28 @@ export class ToDoList extends BaseComponent {
 
   getActive() {
     let temp = this.itemsArr;
-    this.itemsArr = this.itemsArr.filter( item => !item.checked );
+    this.itemsArr = this.itemsArr.filter(item => !item.checked);
     this.render();
     this.itemsArr = temp;
   }
 
   getCompleted() {
     let temp = this.itemsArr;
-    this.itemsArr = this.itemsArr.filter( item => item.checked );
+    this.itemsArr = this.itemsArr.filter(item => item.checked);
     this.render();
     this.itemsArr = temp;
   }
 
   deleteCompleted() {
-    this.itemsArr = this.itemsArr.filter(item => !item.checked );
+    this.itemsArr = this.itemsArr.filter(item => !item.checked);
     this.render();
   }
 
   render() {
-    this.elem.innerHTML = '';
-    this.elem.className = 'main';
-    this.itemsArr.forEach( (item) => {
-      this.elem.appendChild(item.render());
+    this.elem.html('');
+    this.elem.addClass('main');
+    this.itemsArr.forEach((item) => {
+      this.elem.append(item.render());
     });
     return this.elem;
   }

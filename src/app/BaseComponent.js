@@ -1,9 +1,11 @@
 import * as Handlebars from 'handlebars';
+import $ from 'jquery';
+
 export class BaseComponent {
 
   constructor(containerElement) {
     this.template;
-    this.elem = document.createElement(containerElement);
+    this.elem = $(containerElement);
   }
 
   compile() {

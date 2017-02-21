@@ -1,186 +1,180 @@
 $fa-font-path: '~font-awesome/fonts';
 @import '~font-awesome/scss/font-awesome';
 @import 'reset.css';
-@mixin primary_font(){
+
+$list-border: 2px solid #d1cfcf;
+$primary-font-size: 24px;
+$buttons-content-font-size: 16.6px;
+$prim-left-distance: 6px;
+
+@mixin primary_font() {
   font-family: Lucida Grande Serif;
-  font-size: 12px;
+  font-size: $primary-font-size;
   font-weight: bold;
   color: #8b8f97;
 }
+
 @mixin buttons_style() {
   border: none;
   outline: none;
   background-color: #ffffff;
   color: #c8cace;
-  font-size: 8.33px;
+  font-size: $buttons-content-font-size;
   :active {
     background-color: #dcdee2;
   }
 }
 
-button, input[type="checkbox"], input[type="text"],
-button, input[type="button"] {
-  outline: none;
-  border: none;
-}
-
-input[type="checkbox"]{
-  position: absolute;
-  visibility: hidden;
-  z-index: -1;
-}
-
-input[type="checkbox"] + .pseudo-checkbox {
-  width: 9px;
-  height: 9px;
+@mixin positioning() {
   display: inline-block;
-  border: 1px solid #6bb3ca;
-  background-color: #faf9f9;
-  text-align: center;
-  font-size: 7px;
-  color: #cccecf;
-}
-
-input[type="checkbox"]:checked + .pseudo-checkbox {
-  width: 9px;
-  height: 9px;
-  display: inline-block;
-  border: 1px solid #c4c4c4;
-  background-color: #f6f5f5;
-  text-align: center;
-  font-size: 7px;
-  color: #cccecf;
-}
-
-input[type="checkbox"] + span i {
-  opacity: 0;
-}
-input[type="checkbox"]:checked + span i {
-  opacity: 1;
-}
-main {
-  background: url(line.png) repeat-y;
+  vertical-align: middle;
 }
 
 body {
+  @include primary_font;
   background-color: #f6f3f3;
-  main {
-    background-color: #ffffff;
-    margin: 87px auto;
-    width: 250px;
-    border: 1.5px solid #d1cfcf;
-    header {
-      width: 100%;
-      margin-bottom: 3px;
-      border-bottom: 1.2px solid #e6ebed;
-      padding-bottom: 2px;
-      label{
-        padding-left: 10px;
-       .check-all {
-         display: inline-block;
-         vertical-align: middle;
-       }
+  button {
+    @include positioning;
+    text-align: center;
+  }
+  button, input[type="checkbox"], input[type="text"] {
+    outline: none;
+    border: none;
+  }
+  input[type="checkbox"] {
+    position: absolute;
+    visibility: hidden;
+    z-index: -1;
+  }
+  input[type="checkbox"] + .pseudo-checkbox {
+    margin: auto 20px;
+    @include positioning;
+    width: 18px;
+    height: 18px;
+    border: 1.8px solid #6bb3ca;
+    background-color: #faf9f9;
+    text-align: center;
+    font-size: 14px;
+    color: #cccecf;
+  }
+  input[type="checkbox"]:checked + .pseudo-checkbox {
+    margin: auto 20px;
+    @include positioning;
+    width: 18px;
+    height: 18px;
+    border: 1.8px solid #c4c4c4;
+    background-color: #f6f5f5;
+    text-align: center;
+    font-size: 14px;
+    color: #cccecf;
+  }
+  input[type="checkbox"] + span i {
+    opacity: 0;
+  }
+  input[type="checkbox"]:checked + span i {
+    opacity: 1;
+  }
+  .checked {
+    color: #d9d9d9;
+    text-decoration: line-through;
+  }
+}
+
+main {
+  background: url(line.png) repeat-y;
+  background-color: #ffffff;
+  width: 500px;
+  margin: 160px auto;
+  border: $list-border;
+  header {
+    width: 100%;
+    border-bottom: 1.8px solid #e6ebed;
+    label {
+      @include positioning;
+      margin-bottom: $prim-left-distance;
+    }
+    .input-text {
+      padding-left: $prim-left-distance;
+      @include primary_font;
+      @include positioning;
+    }
+    .add-button {
+      padding-left: 58px;
+      @include buttons_style;
+    }
+  }
+  ul {
+    li:hover .tool-bar {
+      opacity: 1;
+    }
+    .view {
+      height: 44px;
+      border-bottom: 1.5px solid #e6ebed;
+      label {
+        @include positioning;
+        padding-top: 7px;
       }
-      .input-text {
-        margin-left: 20px;
-        display: inline-block;
-        vertical-align: middle;
-        border: none;
-        outline: none;
-        @include primary_font;
+      .to-do-span {
+        @include positioning;
+        height: 24px;
+        margin-top: 12px;
+        padding-left: $prim-left-distance;
       }
-      .add-button {
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 15px;
+      .internal-element {
+        @include positioning;
         @include buttons_style;
+        padding-left: $prim-left-distance;
+        margin-top: 12px;
+        width: 160px;
+        height: 24px;
+        font-style: italic;
+      }
+      .tool-bar {
+        width: 84px;
+        height: 44px;
+        float: right;
+        font-size: 0;
+        opacity: 0;;
+        .edit {
+          padding-top: 4px;
+          width: 40px;
+          height: 40px;
+          @include buttons_style;
+        }
+        .delete {
+          padding-top: 4px;
+          width: 40px;
+          height: 40px;
+          @include buttons_style;
+        }
       }
     }
+  }
+  .footer {
+    position: relative;
+    overflow: hidden;
+    margin: 8px 0 8px 40px;
     ul {
-      li:hover .toolBar {
-        opacity: 1;
-      }
-      .view {
-        height: 22px;
-        border-bottom: 1.2px solid #e6ebed;
-        label {
-          display: inline-block;
-          vertical-align: middle;
-          padding-left: 10px;
-          .pseudo-checkbox{
-            display: inline-block;
-            vertical-align: middle;
-          }
-        }
-        #toDoSpan {
-          display: inline-block;
-          vertical-align: middle;
-          @include primary_font;
-          padding-left: 19px;
-        }
-        .int-el {
-          display: inline-block;
-          vertical-align: middle;
-          width: 80px;
-          height: 12px;
-          margin: auto;
-          margin-left: 19px;
-          @include primary_font;
-          font-style: italic;
-        }
-        .toolBar {
-          width: 42px;
-          height: 22px;
-          float: right;
-          font-size: 0;
-          opacity: 0;
-          .edit {
-            display: inline-block;
-            vertical-align: middle;
-            width: 20px;
-            height: 20px;
-            @include buttons_style;
-          }
-          .del {
-            display: inline-block;
-            vertical-align: middle;
-            width: 20px;
-            height: 20px;
-            @include buttons_style;
-          }
-        }
-      }
-    }
-    .foot {
+      list-style: none;
+      margin: 0;
+      padding: 0;
       position: relative;
-      overflow: hidden;
-      margin: 3px 0 5px 5px;
-      padding-left: 20px;
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
+      left: 50%;
+      float: left;
+      li {
         position: relative;
-        left: 50%;
+        left: -50%;
         float: left;
-        li {
-          position: relative;
-          left: -50%;
-          float: left;
-          button {
-            @include buttons_style;
-          }
+        button {
+          @include buttons_style;
         }
       }
       .filtered-button {
         background-color: #f1f0f0;
-        border: 1px solid #6bb3ca;
+        border: 1.5px solid #6bb3ca;
       }
     }
   }
 }
 
-.checked {
-  color: #d9d9d9;
-  text-decoration: line-through;
-}
+

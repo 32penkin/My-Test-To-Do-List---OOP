@@ -1,16 +1,16 @@
-import { BaseComponent } from './BaseComponent';
+import {BaseComponent} from './BaseComponent';
 
 export class FooterOfList extends BaseComponent {
 
   constructor(str) {
-    super('div');
+    super('<div>');
     this.str = str;
-    this.template = '<p>{{ str }}</p>';
+    this.template = `<p>{{ str }}</p>`;
   }
 
   render() {
-  	this.elem.className = 'last-foot';
-    this.elem.innerHTML = this.compile();
+    this.elem.addClass('last-footer');
+    this.elem.html(this.compile());
     return this.elem;
   }
 }

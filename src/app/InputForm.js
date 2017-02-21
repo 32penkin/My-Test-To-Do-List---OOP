@@ -1,16 +1,13 @@
-import { BaseComponent } from'./BaseComponent';
-import { ToDoList } from './ToDoList';
-import { FiltersOfList } from './FiltersOfList';
-import { FooterOfList } from './FooterOfList';
-import { ToDoItem } from './ToDoItem';
+import {BaseComponent} from'./BaseComponent';
+import {ToDoItem} from './ToDoItem';
 
 export class InputForm extends BaseComponent {
 
   constructor(name, list) {
-    super('header');
+    super('<header>');
     this.name = name;
     this.list = list;
-    this.template = `<label class="labelll">
+    this.template = `<label class="label-for-checkbox">
                         <input type="checkbox" class="check-all">
                         <span class="pseudo-checkbox"><i class="fa fa-check"></i></span>
                      </label>
@@ -19,32 +16,32 @@ export class InputForm extends BaseComponent {
   }
 
   sendNewItem(value) {
-    if(!value.trim()) return false;
+    if (!value.trim()) return false;
     this.list.addNewItem(new ToDoItem(value, false, false, this.list));
     this.list.render();
   }
 
   render() {
-    this.elem.className = 'header';
-    this.elem.innerHTML = this.compile();
-    this.elem.querySelector('.input-text').focus();
-    this.elem.querySelector('.check-all').onchange = () => {
-      this.list.itemsArr.forEach( (item) => {
+    this.elem.addClass('.header');
+    this.elem.html(this.compile());
+    this.elem.find('.input-text').focus();
+    this.elem.find('.check-all').change(() => {
+      this.list.itemsArr.forEach((item) => {
         item.setChecked();
       });
-    }
-    this.elem.querySelector('.add-button').onclick = () => {
-      this.sendNewItem(this.elem.querySelector('.input-text').value);
-      this.elem.querySelector('.input-text').focus();
-      this.elem.querySelector('.input-text').select();
-    };
-    this.elem.querySelector('.input-text').onkeyup = (event) => {
-      if(event.which === 13){
-        this.sendNewItem(this.elem.querySelector('.input-text').value);
-        this.elem.querySelector('.input-text').focus();
-        this.elem.querySelector('.input-text').select();
+    });
+    this.elem.find('.add-button').click(() => {
+      this.sendNewItem(this.elem.find('.input-text').val());
+      this.elem.find('.input-text').focus();
+      this.elem.find('.input-text').select();
+    });
+    this.elem.find('.input-text').keyup((event) => {
+      if (event.which === 13) {
+        this.sendNewItem(this.elem.find('.input-text').val());
+        this.elem.find('.input-text').focus();
+        this.elem.find('.input-text').select();
       }
-    };
+    });
     return this.elem;
   }
 }
