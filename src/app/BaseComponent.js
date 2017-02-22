@@ -5,7 +5,7 @@ export class BaseComponent {
 
   constructor(containerElement) {
     this.template;
-    this.elem = $('<containerElement>');
+    this.elem = $(containerElement);
   }
 
   compile() {

@@ -1,10 +1,9 @@
-import { BaseComponent } from './BaseComponent';
-import { handlebarsTernHelper } from './helpers';
+import {BaseComponent} from './BaseComponent';
 
 export class ToDoItem extends BaseComponent {
 
-  constructor(value, checked, edit, list){
-    super('li');
+  constructor(value, checked, edit, list) {
+    super('<li>');
     this.value = value;
     this.checked = checked;
     this.edit = edit;
@@ -27,6 +26,7 @@ export class ToDoItem extends BaseComponent {
                         <button class="delete" title="Click to delete todo"><i class="fa fa-trash"></i></button>
                      </div>`;
   }
+
   setChecked() {
     this.checked = !this.checked;
     this.render();
@@ -40,19 +40,19 @@ export class ToDoItem extends BaseComponent {
   }
 
   render() {
-    this.elem.className = 'view';
-    this.elem.innerHTML = this.compile();
-    this.elem.querySelector('.check').onchange = () => {
+    this.elem.addClass('view');
+    this.elem.html(this.compile());
+    this.elem.find('.check').change(() => {
       this.setChecked();
-    };
-    this.elem.querySelector('.edit').onclick = () => {
-      if (this.edit) this.value = this.elem.querySelector('.internal-element').value;
+    });
+    this.elem.find('.edit').click(() => {
+      if (this.edit) this.value = this.elem.find('.internal-element').val();
       this.setEdit();
-    };
-    this.elem.querySelector('.delete').onclick = () => {
+    });
+    this.elem.find('.delete').click(() => {
       this.list.deleteItem(this);
       this.render();
-    };
+    });
     return this.elem;
   }
 }
