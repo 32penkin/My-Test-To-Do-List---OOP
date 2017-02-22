@@ -3,8 +3,8 @@ $fa-font-path: '~font-awesome/fonts';
 @import 'reset.css';
 
 @font-face {
-  font-family: "Lucida Grande Regular";
-  src: url('fonts/LucidaGrandeRegular.ttf');
+  font-family: "Lucida Grande";
+  src: url('fonts/LucidaGrande.ttf');
 }
 
 $list-border: 2px solid #d1cfcf;
@@ -15,7 +15,7 @@ $body-bg-color: #f6f3f3;
 $buttons-content-font-size: 18px;
 
 @mixin primary_font() {
-  font-family: "Lucida Grande Regular", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;;
+  font-family: "Lucida Grande", Geneva, Verdana, sans-serif;;
   font-size: 16px;
   font-weight: $primary-font-weight;
   color: $primary-font-color;
@@ -106,7 +106,7 @@ main {
     }
     .input-text {
       font-size: $primary-font-size;
-      padding: 30px 0 14px 0;
+      padding: 28px 0 14px 0;
     }
     .add-button {
       @include buttons_style;
