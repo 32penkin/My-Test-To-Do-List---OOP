@@ -106,12 +106,12 @@ main {
     }
     .input-text {
       font-size: $primary-font-size;
-      margin-top: 10px;
+      margin: 10px 0 0 10px;
     }
     .add-button {
       @include buttons_style;
       @include positioning;
-      margin: 42px 0 24px 20px;
+      margin: 40px 0 24px 12px;
     }
   }
   ul {
@@ -119,7 +119,6 @@ main {
       opacity: 1;
     }
     .view {
-      @include set_width_height(auto, 60px);
       border-bottom: 1.5px solid #e6ebed;
       label {
         @include positioning;
@@ -127,19 +126,21 @@ main {
         margin: 16px 44px 12px 28px;
       }
       .to-do-span {
+        word-wrap: break-word;
+        @include set_width_height(300px, 100%);
         @include positioning;
-        @include set_width_height(300px, 36px);
-        margin: 22px 0 2px 0;
+        margin: 22px 0 22px 10px;
       }
       .internal-element {
         @include positioning;
-        margin: 16px 0 8px 0;
+        margin: 16px 0 8px 10px;
         font-style: italic;
+        font-size: 16px;
       }
       .tool-bar {
         @include positioning;
-        margin: 12px 0 8px 0;
         @include set_width_height(80px, 40px);
+        margin: 12px 0 8px 0;
         float: right;
         font-size: 0;
         opacity: 0;
@@ -161,8 +162,8 @@ main {
     overflow: hidden;
     ul {
       @include positioning;
-      @include set_width_height(340px, 28px);
-      margin: 30px auto 26px 40px;
+      @include set_width_height(auto, 28px);
+      margin: 30px auto 26px 28px;
       list-style: none;
       position: relative;
       left: 50%;
@@ -173,14 +174,14 @@ main {
         float: left;
         button {
           @include buttons_style;
+          margin-right: 12px;
         }
       }
       .filtered-button {
         background-color: #f1f0f0;
         border: 1.8px solid #6bb3ca;
+        font-weight: bold;
       }
     }
   }
 }
-
-
