@@ -15,7 +15,7 @@ export class ToDoItem extends BaseComponent {
                      {{#if edit}}
                         <input type="text" value="{{ value }}" class="internal-element"/>
                      {{else}}
-                        <span class="{{ tern checked true 'checked' '' }} to-do-span">{{value}}</span>
+                        <div class="to-do-cont"><span class="{{ tern checked true 'checked' '' }} to-do-span">{{value}}</span></div>
                      {{/if}}
                      <div class="tool-bar">
                         {{#if edit}}

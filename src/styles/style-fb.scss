@@ -1,0 +1,173 @@
+$fa-font-path: '~font-awesome/fonts';
+@import '~font-awesome/scss/font-awesome';
+@import 'reset.css';
+
+$checkbox-size: 30px;
+$primary-font-weight: 700;
+$primary-font-color: #8b8f97;
+$primary-font-size: 20px;
+$prim-right-margin: 48px;
+$prim-left-margin: 28px;
+$main-border: 2px solid #dfdcdc;
+$co-main-border: 1.8px solid #e6ebed;
+@font-face {
+  font-family: "Lucida Grande";
+  src: url('fonts/LucidaGrande.ttf') format('truetype');
+}
+@mixin row_positioning() {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+@mixin column_positioning() {
+  display: flex;
+  flex-direction: column;
+}
+@mixin primary_font() {
+  font-family: "Lucida Grande", Geneva, Verdana, sans-serif;
+  font-size: $primary-font-size;
+  font-weight: $primary-font-weight;
+  color: $primary-font-color;
+}
+@mixin set_width_height($width, $height) {
+  width: $width;
+  height: $height;
+}
+@mixin buttons_style() {
+  background-color: #ffffff;
+  color: #c8cace;
+  font-size: 16px;
+  :active {
+    background-color: #dcdee2;
+  }
+}
+@mixin margin_for_checkbox($margin-top, $margin-bot) {
+  margin: $margin-top $prim-right-margin $margin-bot $prim-left-margin;
+}
+body {
+  background-color: #f7f5f5;
+  label {
+    @include set_width_height($checkbox-size, $checkbox-size);
+  }
+  button, input[type="checkbox"], input[type="text"] {
+    outline: none;
+    border: none;
+  }
+  button {
+    @include buttons_style;
+  }
+  input[type="checkbox"] {
+    position: absolute;
+    visibility: hidden;
+    z-index: -1;
+  }
+  input[type="checkbox"] + .pseudo-checkbox {
+    @include set_width_height(30px, 30px);
+    border: 2px solid #6bb3ca;
+    border-radius: 2px;
+    background-color: #faf9f9;
+    text-align: center;
+    font-size: 28px;
+    color: #cccecf;
+  }
+  input[type="checkbox"]:checked + .pseudo-checkbox {
+    @include set_width_height(30px, 30px);
+    border: 2px solid #c4c4c4;
+    border-radius: 2px;
+    background-color: #f6f5f5;
+    text-align: center;
+    font-size: 28px;
+    color: #cccecf;
+  }
+  input[type="checkbox"] + span i {
+    opacity: 0;
+  }
+  input[type="checkbox"]:checked + span i {
+    opacity: 1;
+  }
+
+  input[type="text"] {
+    @include primary_font;
+    @include set_width_height(300px, 34px);
+  }
+  .checked {
+    color: #d9d9d9;
+    text-decoration: line-through;
+  }
+  .filtered-button {
+    background-color: #f1f0f0;
+    border: 1.8px solid #6bb3ca;
+    border-radius: 2px;
+    font-weight: bold;
+  }
+}
+
+main {
+  background: url(img/line.png) repeat-y;
+  @include column_positioning;
+  @include set_width_height(500px, auto);
+  margin: 170px auto;
+  border: $main-border;
+  header {
+    @include row_positioning;
+    @include set_width_height(auto, 80px);
+    border-bottom: $co-main-border;
+    label {
+      @include row_positioning;
+      @include margin_for_checkbox(30px, 16px);
+    }
+    .input-text {}
+    .add-button {
+      @include set_width_height(40px, 40px);
+    }
+  }
+  ul {
+    @include column_positioning;
+    li:hover .tool-bar {
+      opacity: 1;
+    }
+    .view {
+      @include row_positioning;
+      @include set_width_height(auto, 60px);
+      border-bottom: $co-main-border;
+      label {
+        @include row_positioning;
+        @include margin_for_checkbox(auto, auto);
+      }
+      .to-do-cont {
+        @include row_positioning;
+        .to-do-span {
+          word-wrap: break-word;
+          @include set_width_height(300px, 100%);
+          @include primary_font;
+        }
+      }
+      .internal-element {
+        font-style: italic;
+      }
+      .tool-bar {
+        @include row_positioning;
+        opacity: 0;
+        .edit {
+          @include set_width_height(40px, 40px);
+        }
+        .delete {
+          @include set_width_height(40px, 40px);
+        }
+      }
+    }
+  }
+
+  .footer {
+    @include set_width_height(auto, 80px);
+    @include row_positioning;
+    ul {
+      @include row_positioning;
+      margin-left: $prim-left-margin + $prim-right-margin + $checkbox-size;
+      li {
+        margin-right: 5px;
+        button {}
+      }
+    }
+  }
+}
