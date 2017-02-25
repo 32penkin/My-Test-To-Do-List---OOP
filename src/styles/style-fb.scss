@@ -14,26 +14,26 @@ $co-main-border: 1.8px solid #e6ebed;
   font-family: "Lucida Grande";
   src: url('fonts/LucidaGrande.ttf') format('truetype');
 }
-@mixin row_positioning() {
+@mixin row-positioning() {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-@mixin column_positioning() {
+@mixin column-positioning() {
   display: flex;
   flex-direction: column;
 }
-@mixin primary_font() {
+@mixin primary-font() {
   font-family: "Lucida Grande", Geneva, Verdana, sans-serif;
   font-size: $primary-font-size;
   font-weight: $primary-font-weight;
   color: $primary-font-color;
 }
-@mixin set_width_height($width, $height) {
+@mixin set-width-height($width, $height) {
   width: $width;
   height: $height;
 }
-@mixin buttons_style() {
+@mixin buttons-style() {
   background-color: #ffffff;
   color: #c8cace;
   font-size: 16px;
@@ -41,20 +41,20 @@ $co-main-border: 1.8px solid #e6ebed;
     background-color: #dcdee2;
   }
 }
-@mixin margin_for_checkbox($margin-top, $margin-bot) {
+@mixin margin-for-checkbox($margin-top, $margin-bot) {
   margin: $margin-top $prim-right-margin $margin-bot $prim-left-margin;
 }
 body {
   background-color: #f7f5f5;
   label {
-    @include set_width_height($checkbox-size, $checkbox-size);
+    @include set-width-height($checkbox-size, $checkbox-size);
   }
   button, input[type="checkbox"], input[type="text"] {
     outline: none;
     border: none;
   }
   button {
-    @include buttons_style;
+    @include buttons-style;
   }
   input[type="checkbox"] {
     position: absolute;
@@ -62,7 +62,7 @@ body {
     z-index: -1;
   }
   input[type="checkbox"] + .pseudo-checkbox {
-    @include set_width_height(30px, 30px);
+    @include set-width-height(30px, 30px);
     border: 2px solid #6bb3ca;
     border-radius: 2px;
     background-color: #faf9f9;
@@ -71,7 +71,7 @@ body {
     color: #cccecf;
   }
   input[type="checkbox"]:checked + .pseudo-checkbox {
-    @include set_width_height(30px, 30px);
+    @include set-width-height(30px, 30px);
     border: 2px solid #c4c4c4;
     border-radius: 2px;
     background-color: #f6f5f5;
@@ -87,8 +87,8 @@ body {
   }
 
   input[type="text"] {
-    @include primary_font;
-    @include set_width_height(300px, 34px);
+    @include primary-font;
+    @include set-width-height(300px, 34px);
   }
   .checked {
     color: #d9d9d9;
@@ -104,65 +104,65 @@ body {
 
 main {
   background: url(img/line.png) repeat-y;
-  @include column_positioning;
-  @include set_width_height(500px, auto);
+  @include column-positioning;
+  @include set-width-height(500px, auto);
   margin: 170px auto;
   border: $main-border;
   header {
-    @include row_positioning;
-    @include set_width_height(auto, 80px);
+    @include row-positioning;
+    @include set-width-height(auto, 80px);
     border-bottom: $co-main-border;
     label {
-      @include row_positioning;
-      @include margin_for_checkbox(30px, 16px);
+      @include row-positioning;
+      @include margin-for-checkbox(30px, 16px);
     }
     .input-text {}
     .add-button {
-      @include set_width_height(40px, 40px);
+      @include set-width-height(40px, 40px);
     }
   }
   ul {
-    @include column_positioning;
+    @include column-positioning;
     li:hover .tool-bar {
       opacity: 1;
     }
     .view {
-      @include row_positioning;
-      @include set_width_height(auto, 60px);
+      @include row-positioning;
+      @include set-width-height(auto, 60px);
       border-bottom: $co-main-border;
       label {
-        @include row_positioning;
-        @include margin_for_checkbox(auto, auto);
+        @include row-positioning;
+        @include margin-for-checkbox(auto, auto);
       }
       .to-do-cont {
-        @include row_positioning;
+        @include row-positioning;
         .to-do-span {
           word-wrap: break-word;
-          @include set_width_height(300px, 100%);
-          @include primary_font;
+          @include set-width-height(300px, 100%);
+          @include primary-font;
         }
       }
       .internal-element {
         font-style: italic;
       }
       .tool-bar {
-        @include row_positioning;
+        @include row-positioning;
         opacity: 0;
         .edit {
-          @include set_width_height(40px, 40px);
+          @include set-width-height(40px, 40px);
         }
         .delete {
-          @include set_width_height(40px, 40px);
+          @include set-width-height(40px, 40px);
         }
       }
     }
   }
 
   .footer {
-    @include set_width_height(auto, 80px);
-    @include row_positioning;
+    @include set-width-height(auto, 80px);
+    @include row-positioning;
     ul {
-      @include row_positioning;
+      @include row-positioning;
       margin-left: $prim-left-margin + $prim-right-margin + $checkbox-size;
       li {
         margin-right: 5px;
