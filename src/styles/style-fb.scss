@@ -9,7 +9,7 @@ $primary-font-size: 20px;
 $prim-right-margin: 48px;
 $prim-left-margin: 28px;
 $main-border: 2px solid #dfdcdc;
-$co-main-border: 1.8px solid #e6ebed;
+$co-main-border: 1px solid #e6ebed;
 @font-face {
   font-family: "Lucida Grande";
   src: url('fonts/LucidaGrande.ttf') format('truetype');
@@ -128,7 +128,7 @@ main {
     }
     .view {
       @include row-positioning;
-      @include set-width-height(auto, 60px);
+      @include set-width-height(auto, 100%);
       border-bottom: $co-main-border;
       label {
         @include row-positioning;
@@ -149,10 +149,10 @@ main {
         @include row-positioning;
         opacity: 0;
         .edit {
-          @include set-width-height(40px, 40px);
+          @include set-width-height(40px, 60px);
         }
         .delete {
-          @include set-width-height(40px, 40px);
+          @include set-width-height(40px, 60px);
         }
       }
     }
@@ -165,7 +165,10 @@ main {
       @include row-positioning;
       margin-left: $prim-left-margin + $prim-right-margin + $checkbox-size;
       li {
-        margin-right: 5px;
+        :first-child {
+          padding-left: 0;
+        }
+        margin-right: 10px;
         button {}
       }
     }
