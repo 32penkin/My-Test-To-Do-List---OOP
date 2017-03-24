@@ -1,6 +1,6 @@
-import { MainComponent } from './app/MainComponent';
-import { attachMainComponent } from './app/helpers';
-import './styles/style.scss';
+import {MainComponent} from './app/MainComponent';
+import './app/helpers';
+import './styles/style-fb.scss';
+import $ from 'jquery';
 
-
-attachMainComponent(new MainComponent().render());
+$('body').html(new MainComponent().render());

@@ -1,24 +1,25 @@
-import { InputForm } from './InputForm';
-import { ToDoList } from './ToDoList';
-import { FiltersOfList } from './FiltersOfList';
-import { FooterOfList } from './FooterOfList';
-import { ToDoItem } from './ToDoItem';
+import {InputForm} from './InputForm';
+import {ToDoList} from './ToDoList';
+import {ListFilters} from './ListFilters';
+import {ListFooter} from './ListFooter';
+import $ from 'jquery';
+
 
 export class MainComponent {
 
   constructor() {
-    this.elem = document.createElement('main');
-    this.myToDoList = new ToDoList();
-    this.myInputForm = new InputForm('toDos', this.myToDoList);
-    this.myFilterOfList = new FiltersOfList(this.myToDoList);
-    this.myFooterOfList = new FooterOfList('Press Enter to add todo');
+    this.elem = $('<main>');
+    this.ToDoList = new ToDoList();
+    this.InputForm = new InputForm('', this.ToDoList);
+    this.ListFilters = new ListFilters(this.ToDoList);
+    this.ListFooter = new ListFooter('');
   }
 
   render() {
-    this.elem.appendChild(this.myInputForm.render());
-    this.elem.appendChild(this.myToDoList.render());
-    this.elem.appendChild(this.myFilterOfList.render());
-    this.elem.appendChild(this.myFooterOfList.render());
+    this.elem.append(this.InputForm.render());
+    this.elem.append(this.ToDoList.render());
+    this.elem.append(this.ListFilters.render());
+    this.elem.append(this.ListFooter.render());
     return this.elem;
   }
 }
