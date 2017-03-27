@@ -3,9 +3,8 @@ import {ToDoItem} from './ToDoItem';
 
 export class InputForm extends BaseComponent {
 
-  constructor(name, list) {
+  constructor(list) {
     super('<header>');
-    this.name = name;
     this.list = list;
     this.template = `<label class="label-for-checkbox">
                         <input type="checkbox" class="check-all">

@@ -5,6 +5,7 @@ export class BaseComponent {
 
   constructor(containerElement) {
     this.template;
+    this.list;
     this.elem = $(containerElement);
   }
 
