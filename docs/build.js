@@ -10725,7 +10725,7 @@ var ListFilters = exports.ListFilters = function (_BaseComponent) {
 
     var _this = _possibleConstructorReturn(this, (ListFilters.__proto__ || Object.getPrototypeOf(ListFilters)).call(this, '<footer>'));
 
-    _this.changeFunc;
+    _this.changeFunc = function () {};
     _this.currentFilter = '';
     _this.template = '<ul><li><button id="get_all" class="{{ tern currentFilter \'All\' \'filtered-button\' \'\' }}">All</button></li>\n                     <li><button id="get_active" class="{{ tern currentFilter \'Active\' \'filtered-button\' \'\' }}">Active</button></li>\n                     <li><button id=\'get_completed\' class="{{ tern currentFilter \'Completed\' \'filtered-button\' \'\' }}">Completed</button></li>\n                     <li><button id="clear_completed">Clear completed</button></li></ul>';
     return _this;
@@ -10747,25 +10747,22 @@ var ListFilters = exports.ListFilters = function (_BaseComponent) {
       var _this2 = this;
 
       this.elem.addClass('footer');
+      this.elem.html('');
       this.elem.html(this.compile());
       this.elem.find('#get_all').click(function () {
         _this2.currentFilter = 'All';
-        _this2.elem.html('');
         _this2.render();
       });
       this.elem.find('#get_active').click(function () {
         _this2.currentFilter = 'Active';
-        _this2.elem.html('');
         _this2.render();
       });
       this.elem.find('#get_completed').click(function () {
         _this2.currentFilter = 'Completed';
-        _this2.elem.html('');
         _this2.render();
       });
       this.elem.find('#clear_completed').click(function () {
         _this2.currentFilter = 'DelComp';
-        _this2.elem.html('');
         _this2.render();
       });
       this.changeFunc(this.currentFilter);
