@@ -10559,16 +10559,7 @@ var MainComponent = exports.MainComponent = function () {
       var _this = this;
 
       this.ListFilters.onFilterChange(function (filter) {
-        if (filter === 'All') {
-          _this.ToDoList.getAll();
-        } else if (filter === 'Active') {
-          _this.ToDoList.getActive();
-        } else if (filter === 'Completed') {
-          _this.ToDoList.getCompleted();
-        } else if (filter === 'DelComp') {
-          _this.ToDoList.deleteCompleted();
-          _this.ListFilters.setCurrentFilter('All');
-        }
+        _this.ToDoList.setFilter(filter);
       });
       this.elem.append(this.InputForm.render());
       this.elem.append(this.ToDoList.render());
@@ -10759,28 +10750,25 @@ var ListFilters = exports.ListFilters = function (_BaseComponent) {
       this.elem.html(this.compile());
       this.elem.find('#get_all').click(function () {
         _this2.currentFilter = 'All';
-        _this2.changeFunc(_this2.currentFilter);
         _this2.elem.html('');
         _this2.render();
       });
       this.elem.find('#get_active').click(function () {
         _this2.currentFilter = 'Active';
-        _this2.changeFunc(_this2.currentFilter);
         _this2.elem.html('');
         _this2.render();
       });
       this.elem.find('#get_completed').click(function () {
         _this2.currentFilter = 'Completed';
-        _this2.changeFunc(_this2.currentFilter);
         _this2.elem.html('');
         _this2.render();
       });
       this.elem.find('#clear_completed').click(function () {
         _this2.currentFilter = 'DelComp';
-        _this2.changeFunc(_this2.currentFilter);
         _this2.elem.html('');
         _this2.render();
       });
+      this.changeFunc(this.currentFilter);
       return this.elem;
     }
   }]);
@@ -10914,37 +10902,30 @@ var ToDoList = exports.ToDoList = function (_BaseComponent) {
       this.render();
     }
   }, {
-    key: 'getAll',
-    value: function getAll() {
-      this.render();
-    }
-  }, {
-    key: 'getActive',
-    value: function getActive() {
-      var temp = this.itemsArr;
-      this.itemsArr = this.itemsArr.filter(function (item) {
-        return !item.checked;
-      });
-      this.render();
-      this.itemsArr = temp;
-    }
-  }, {
-    key: 'getCompleted',
-    value: function getCompleted() {
-      var temp = this.itemsArr;
-      this.itemsArr = this.itemsArr.filter(function (item) {
-        return item.checked;
-      });
-      this.render();
-      this.itemsArr = temp;
-    }
-  }, {
-    key: 'deleteCompleted',
-    value: function deleteCompleted() {
-      this.itemsArr = this.itemsArr.filter(function (item) {
-        return !item.checked;
-      });
-      this.render();
+    key: 'setFilter',
+    value: function setFilter(value) {
+      if (value === 'All') {
+        this.render();
+      } else if (value === 'Active') {
+        var temp = this.itemsArr;
+        this.itemsArr = this.itemsArr.filter(function (item) {
+          return !item.checked;
+        });
+        this.render();
+        this.itemsArr = temp;
+      } else if (value === 'Completed') {
+        var _temp = this.itemsArr;
+        this.itemsArr = this.itemsArr.filter(function (item) {
+          return item.checked;
+        });
+        this.render();
+        this.itemsArr = _temp;
+      } else if (value === 'DelComp') {
+        this.itemsArr = this.itemsArr.filter(function (item) {
+          return !item.checked;
+        });
+        this.render();
+      }
     }
   }, {
     key: 'render',

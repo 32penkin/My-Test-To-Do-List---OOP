@@ -25,31 +25,28 @@ export class ListFilters extends BaseComponent {
     this.elem.html(this.compile());
     this.elem.find('#get_all').click(() => {
       this.currentFilter = 'All';
-      this.changeFunc(this.currentFilter);
-      this.elem.html('');
+       this.elem.html('');
       this.render();
 
     });
     this.elem.find('#get_active').click(() => {
       this.currentFilter = 'Active';
-      this.changeFunc(this.currentFilter);
-      this.elem.html('');
+       this.elem.html('');
       this.render();
 
     });
     this.elem.find('#get_completed').click(() => {
       this.currentFilter = 'Completed';
-      this.changeFunc(this.currentFilter);
-      this.elem.html('');
+       this.elem.html('');
       this.render();
 
     });
     this.elem.find('#clear_completed').click(() => {
       this.currentFilter = 'DelComp';
-      this.changeFunc(this.currentFilter);
-      this.elem.html('');
+       this.elem.html('');
       this.render();
     });
+    this.changeFunc(this.currentFilter);
     return this.elem;
   }
 }

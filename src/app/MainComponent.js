@@ -15,19 +15,7 @@ export class MainComponent {
 
   render() {
     this.ListFilters.onFilterChange(filter => {
-      if(filter === 'All'){
-        this.ToDoList.getAll();
-      }
-      else if(filter === 'Active'){
-        this.ToDoList.getActive();
-      }
-      else if(filter === 'Completed'){
-        this.ToDoList.getCompleted();
-      }
-      else if(filter === 'DelComp'){
-        this.ToDoList.deleteCompleted();
-        this.ListFilters.setCurrentFilter('All');
-      }
+      this.ToDoList.setFilter(filter);
     });
     this.elem.append(this.InputForm.render());
     this.elem.append(this.ToDoList.render());

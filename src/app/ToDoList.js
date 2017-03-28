@@ -17,27 +17,26 @@ export class ToDoList extends BaseComponent {
     this.render();
   }
 
-  getAll() {
-    this.render();
-  }
-
-  getActive() {
-    let temp = this.itemsArr;
-    this.itemsArr = this.itemsArr.filter(item => !item.checked);
-    this.render();
-    this.itemsArr = temp;
-  }
-
-  getCompleted() {
-    let temp = this.itemsArr;
-    this.itemsArr = this.itemsArr.filter(item => item.checked);
-    this.render();
-    this.itemsArr = temp;
-  }
-
-  deleteCompleted() {
-    this.itemsArr = this.itemsArr.filter(item => !item.checked);
-    this.render();
+  setFilter(value) {
+    if(value === 'All'){
+      this.render();
+    }
+    else if(value === 'Active') {
+      let temp = this.itemsArr;
+      this.itemsArr = this.itemsArr.filter(item => !item.checked);
+      this.render();
+      this.itemsArr = temp;
+    }
+    else if(value === 'Completed') {
+      let temp = this.itemsArr;
+      this.itemsArr = this.itemsArr.filter(item => item.checked);
+      this.render();
+      this.itemsArr = temp;
+    }
+    else if(value === 'DelComp') {
+      this.itemsArr = this.itemsArr.filter(item => !item.checked);
+      this.render();
+    }
   }
 
   render() {
